@@ -145,63 +145,72 @@
 
 <div id="wrapper" class="min-h-screen max-w-[640px] mx-auto bg-white shadow-2xl relative overflow-hidden pb-10">
     
-    <!-- HEADER SECTION -->
-    <header class="relative overflow-hidden h-[95vh] w-full">
-        <!-- Ảnh nền -->
-        <img src="https://api.vesey.vn/templates/vs-template-6/header-bg.webp" class="absolute inset-0 w-full h-full object-cover animate__animated animate__fadeIn" alt="Wedding Photo">
-        
-        <!-- Lớp phủ tối 10% toàn bộ ảnh -->
-        <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
-        
-        <!-- Lớp phủ Gradient mờ ở nửa dưới (GIÚP CHỮ NỔI BẬT LÊN TRÊN NỀN VÁY CƯỚI TRẮNG) -->
-        <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none"></div>
+<!-- PHẦN HEADER ĐÃ ĐƯỢC FIX TOÀN BỘ FONT SIZE LINH HOẠT -->
+<header class="relative overflow-hidden h-[95vh] w-full">
+    <!-- Ảnh nền & Lớp phủ -->
+    <img src="https://zpi.cx/b/Js9iL.png" class="absolute inset-0 w-full h-full object-cover animate__animated animate__fadeIn" alt="Wedding Photo">
+    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none"></div>
 
-        <!-- 2 Chữ góc trên cùng dùng font Aureligena -->
-        <div class="absolute top-8 left-0 w-full flex justify-between px-6 text-white z-20">
-            <span class="font-aureligena text-[30px] md:text-[50px] drop-shadow-md capitalize">Our Wedding</span>
-            <span class="font-aureligena text-[40px] md:text-[50px] drop-shadow-md capitalize">Invitation</span>
-        </div>
-
-        <!-- Khối giữa: Ngày tháng, You complete me, Our Wedding (ĐƯỢC ĐẨY LÊN top-[40%] để k che quá nhiều người) -->
-        <div class="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center z-20">
-            <!-- Ngày tháng -->
-            <div class="animate__animated animate__fadeInDown">
-                <h2 class="text-white font-title text-3xl md:text-5xl tracking-tight drop-shadow-md font-bold">03-05-2026</h2>
-            </div>
-
-            <!-- "You complete me" & Đường kẻ đỏ -->
-            <div class="relative w-full flex justify-center items-center mt-4">
-                <!-- Đổi font sang FzAmira, thêm italic (nghiêng), dùng text-[số px] để tùy chỉnh to nhỏ -->
-                <h3 class="font-amira text-[#ffeb3b] text-[70px] md:text-[100px] leading-none transform -rotate-3 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate__animated animate__fadeIn">
-                    Y2ou compl2ete me2
-                </h3>
-            </div>
-
-            <!-- "OUR WEDDING" ở giữa -->
-            <div class="mt-6 animate__animated animate__zoomIn animate__delay-1s">
-                <h4 class="text-white font-title text-xl md:text-3xl tracking-[0.4em] drop-shadow-md uppercase font-bold">OUR WEDDING</h4>
-            </div>
-        </div>
-
-<!-- KHỐI TÊN CD-CR VÀ KHÁCH MỜI -->
-<!-- Tăng bottom từ 20 lên 32 để đẩy toàn bộ cụm lên cao hơn, tạo khoảng trống phía dưới -->
-<div class="absolute bottom-12 left-0 w-full flex flex-col items-center z-20 px-2">
-    
-    <!-- Khối Tên CDCR: Thêm mb-10 để tạo khoảng cách rõ rệt với phần dưới -->
-    <div class="flex justify-center items-center gap-2 sm:gap-4 text-white flex-nowrap whitespace-nowrap animate__animated animate__fadeInUp animate__delay-2s mb-32">
-        <span class="font-bride-groom text-5xl md:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none pt-2 text-center">Quốc Dũng</span>
-        <span class="text-wedding-red text-3xl md:text-4xl drop-shadow-md font-bold mx-1">囍</span>
-        <span class="font-bride-groom text-5xl md:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none pt-2 text-center">Ái Ly</span>
+    <!-- 2 Chữ góc trên cùng (Our Wedding / Invitation) -->
+    <div class="absolute top-6 left-0 w-full flex justify-between px-6 text-white z-20">
+        <span class="font-aureligena capitalize drop-shadow-md" style="font-size: clamp(2.5rem, 5vw, 3.5rem);">Our Wedding</span>
+        <span class="font-aureligena capitalize drop-shadow-md" style="font-size: clamp(3.5rem, 5vw, 4.5rem);">Invitation</span>
     </div>
 
-    <!-- Khối Khách Mời -->
-    <div id="guest-box" class="text-center w-full hidden animate__animated animate__fadeInUp animate__delay-3s">
-        <p class="font-lovebird text-white text-xl md:text-2xl tracking-[0.05em] mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] capitalize opacity-90">Trân trọng kính mời</p>
-        <h3 id="guest-name" class="font-script text-3xl md:text-4xl text-[#ffeb3b] tracking-wide capitalize drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-bold"></h3>
+    <!-- KHỐI GIỮA: Ngày tháng & "You complete me" -->
+    <div class="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center z-20 px-4 text-center">
+        <!-- Ngày tháng -->
+        <div class="animate__animated animate__fadeInDown">
+            <h2 class="text-white font-title tracking-tight drop-shadow-md font-bold" style="font-size: clamp(1.5rem, 6vw, 3rem);">
+                03-05-2026
+            </h2>
+        </div>
+
+        <!-- "You complete me" - ĐÃ FIX LỖI TRÀN DÒNG -->
+        <div class="relative w-full flex justify-center items-center mt-2">
+            <h3 class="font-amira text-[#ffeb3b] leading-[1.1] transform -rotate-3 italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] animate__animated animate__fadeIn"
+                style="font-size: clamp(3.5rem, 15vw, 7rem); max-width: 95vw; word-wrap: break-word;">
+                Y2ou compl2ete me2
+            </h3>
+        </div>
+
+        <!-- "OUR WEDDING" phụ -->
+        <div class="mt-4 animate__animated animate__zoomIn animate__delay-1s">
+            <h4 class="text-white font-title tracking-[0.3em] drop-shadow-md uppercase font-bold" style="font-size: clamp(0.9rem, 3vw, 1.5rem);">
+                OUR WEDDING
+            </h4>
+        </div>
     </div>
 
-</div>
-    </header>
+    <!-- KHỐI DƯỚI: Tên CDCR & Khách mời -->
+    <div class="absolute inset-x-0 bottom-[8vh] flex flex-col items-center z-20 px-4">
+        
+        <!-- Tên CDCR -->
+        <div class="flex justify-center items-center gap-2 text-white flex-nowrap whitespace-nowrap animate__animated animate__fadeInUp animate__delay-2s mb-[4vh]">
+            <span class="font-bride-groom leading-none pt-2 text-center" 
+                  style="font-size: clamp(1.2rem, 9vw, 3.8rem); text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+                Quốc Dũng
+            </span>
+            <span class="text-wedding-red font-bold mx-1" style="font-size: clamp(1.5rem, 5vw, 2.5rem);">囍</span>
+            <span class="font-bride-groom leading-none pt-2 text-center" 
+                  style="font-size: clamp(1.2rem, 9vw, 3.8rem); text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+                Ái Ly
+            </span>
+        </div>
+
+        <!-- Khối Khách Mời -->
+        <div id="guest-box" class="text-center w-full hidden animate__animated animate__fadeInUp animate__delay-3s">
+            <p class="font-lovebird text-white tracking-[0.05em] mb-1 opacity-90" 
+               style="font-size: clamp(1.1rem, 4vw, 1.6rem); text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+                Trân trọng kính mời
+            </p>
+            <h3 id="guest-name" class="font-script text-[#ffeb3b] tracking-wide capitalize font-bold" 
+                style="font-size: clamp(1.8rem, 8vw, 3rem); text-shadow: 0 2px 8px rgba(0,0,0,1);">
+            </h3>
+        </div>
+    </div>
+</header>
 
     <!-- WELCOME SECTION -->
     <section class="pt-16 pb-20 px-8 text-center bg-[#fcfcfc]">
