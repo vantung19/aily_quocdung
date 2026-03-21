@@ -171,9 +171,6 @@
 
             <!-- "You complete me" & Đường kẻ đỏ -->
             <div class="relative w-full flex justify-center items-center mt-4">
-                <svg class="red-curve-line" viewBox="0 0 500 100" preserveAspectRatio="none">
-                    <path d="M0,50 Q 250,70 500,40" stroke="#ff0000" stroke-width="2" fill="transparent" />
-                </svg>
                 <!-- Đổi font sang FzAmira, thêm italic (nghiêng), dùng text-[số px] để tùy chỉnh to nhỏ -->
                 <h3 class="font-amira text-[#ffeb3b] text-[70px] md:text-[100px] leading-none transform -rotate-3 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate__animated animate__fadeIn">
                     Y2ou compl2ete me2
@@ -186,24 +183,24 @@
             </div>
         </div>
 
-        <!-- KHỐI TÊN CD-CR VÀ KHÁCH MỜI -->
-        <!-- Đưa lên bottom-12, và có lớp gradient đen mờ bảo vệ phía sau nên bao nổi bật -->
-        <div class="absolute bottom-12 left-0 w-full flex flex-col items-center z-20 px-2">
-            
-            <!-- Tên Cô dâu Chú rể phóng to lại như cũ cho đúng hierarchy -->
-            <div class="flex justify-center items-center gap-2 sm:gap-4 text-white flex-nowrap whitespace-nowrap animate__animated animate__fadeInUp animate__delay-2s">
-                <span class="font-bride-groom text-5xl md:text-6xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none pt-2 text-center">Quốc Dũng</span>
-                <span class="text-wedding-red text-3xl md:text-4xl drop-shadow-md font-bold mx-1">囍</span>
-                <span class="font-bride-groom text-5xl md:text-6xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none pt-2 text-center">Ái Ly</span>
-            </div>
+<!-- KHỐI TÊN CD-CR VÀ KHÁCH MỜI -->
+<!-- Tăng bottom từ 20 lên 32 để đẩy toàn bộ cụm lên cao hơn, tạo khoảng trống phía dưới -->
+<div class="absolute bottom-12 left-0 w-full flex flex-col items-center z-20 px-2">
+    
+    <!-- Khối Tên CDCR: Thêm mb-10 để tạo khoảng cách rõ rệt với phần dưới -->
+    <div class="flex justify-center items-center gap-2 sm:gap-4 text-white flex-nowrap whitespace-nowrap animate__animated animate__fadeInUp animate__delay-2s mb-32">
+        <span class="font-bride-groom text-5xl md:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none pt-2 text-center">Quốc Dũng</span>
+        <span class="text-wedding-red text-3xl md:text-4xl drop-shadow-md font-bold mx-1">囍</span>
+        <span class="font-bride-groom text-5xl md:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none pt-2 text-center">Ái Ly</span>
+    </div>
 
-            <!-- Tên Khách Mời (mt-6 kéo sát lại với cụm tên CDCR) -->
-            <div id="guest-box" class="mt-6 text-center w-full hidden animate__animated animate__fadeInUp animate__delay-3s">
-                <p class="font-lovebird text-white text-xl md:text-2xl tracking-[0.05em] mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] capitalize opacity-90">Trân trọng kính mời</p>
-                <h3 id="guest-name" class="font-script text-3xl md:text-4xl text-[#ffeb3b] tracking-wide capitalize drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-bold"></h3>
-            </div>
+    <!-- Khối Khách Mời -->
+    <div id="guest-box" class="text-center w-full hidden animate__animated animate__fadeInUp animate__delay-3s">
+        <p class="font-lovebird text-white text-xl md:text-2xl tracking-[0.05em] mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] capitalize opacity-90">Trân trọng kính mời</p>
+        <h3 id="guest-name" class="font-script text-3xl md:text-4xl text-[#ffeb3b] tracking-wide capitalize drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-bold"></h3>
+    </div>
 
-        </div>
+</div>
     </header>
 
     <!-- WELCOME SECTION -->
@@ -428,7 +425,6 @@
         
         <div class="relative overflow-hidden mb-8 wow animate__animated animate__zoomIn">
             <img src="https://api.vesey.vn/templates/vs-template-6/img-content-6-2.webp" class="w-1/2 mx-auto rounded-xl shadow-md" alt="Ring">
-            <img src="https://api.vesey.vn/templates/vs-template-6/line-header.webp" class="absolute bottom-[10%] left-1/2 -translate-x-1/2 max-w-[115%]" alt="Line">
         </div>
 
         <!-- Tiêu đề dùng Harukaze -->
@@ -462,7 +458,7 @@
             </div>
 
             <!-- Đổi sang Fz-Lovebird -->
-            <h2 class="font-lovebird text-5xl md:text-6xl text-wedding-red mb-4 capitalize">Xác Nhận Tham Dự</h2>
+            <h2 class="font-lovebird text-5xl md:text-4xl text-wedding-red mb-4 capitalize">Xác Nhận Tham Dự</h2>
             <p class="font-body text-base text-gray-600 mb-8">Sự hiện diện của bạn là niềm vinh hạnh cho chúng tôi.<br>Vui lòng xác nhận để chúng tôi chuẩn bị chu đáo hơn.</p>
 
             <form id="confirmForm" class="space-y-6 text-left">
