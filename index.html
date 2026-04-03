@@ -111,44 +111,47 @@
 
 <div id="wrapper" class="min-h-screen w-full max-w-[1200px] mx-auto bg-white shadow-2xl relative overflow-hidden pb-10 flex flex-col items-center">
     
-<!-- PHẦN HEADER -->
-<header class="relative overflow-hidden min-h-screen w-full flex flex-col justify-between items-center py-12">
+<!-- PHẦN HEADER ĐÃ ĐƯỢC FIX TRÁNH ĐÈ CHỮ TRÊN DESKTOP -->
+<header class="relative overflow-hidden min-h-screen w-full flex flex-col justify-between items-center py-10 md:py-16">
     <img src="images/bg-header.jpg" class="absolute inset-0 w-full h-full object-cover object-top md:object-[50%_25%] animate__animated animate__fadeIn z-0" alt="Wedding Photo">
     <div class="absolute inset-0 bg-white/10 pointer-events-none z-0"></div>
 
     <!-- KHỐI TRÊN CÙNG: Tên CDCR -->
-    <div class="z-20 absolute top-4 md:top-8 text-center animate__animated animate__fadeInDown w-full px-4 flex justify-center">
+    <div class="z-20 text-center animate__animated animate__fadeInDown w-full px-4 flex justify-center">
         <h1 class="font-bride-groom text-black leading-none whitespace-nowrap" 
-            style="font-size: clamp(1.5rem, 10vw, 5.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
-            Ái Ly & Quốc Dũng
+            style="font-size: clamp(1.8rem, 8vw, 4.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+            Quốc Dũng & Ái Ly
         </h1>
     </div>
 
     <!-- KHỐI GIỮA: We got Married & Ngày tháng -->
-    <div class="z-20 flex flex-col items-center text-center mt-auto mb-auto w-full px-4"> 
+    <div class="z-20 flex flex-col items-center text-center w-full px-4">
         <h2 class="font-amira text-white leading-[0.8] whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] animate__animated animate__zoomIn flex flex-col items-start"
-            style="font-size: clamp(4.5rem, 18vw, 11rem); transform: rotate(-3deg);">
-            <span>W2e got2</span>
-            <!-- ml-[1.6em] giúp đẩy chữ Married lùi vào đúng ngay cuối chữ got -->
-            <span class="ml-[1.6em]">M2arried</span>
+            style="font-size: clamp(4rem, 15vw, 8.5rem); transform: rotate(-3deg);">
+            <span>We got</span>
+            <span class="ml-[1.6em]">Married</span>
         </h2>
         
+        <p class="font-script text-black font-bold tracking-wide mt-4 md:mt-6 whitespace-nowrap animate__animated animate__fadeInUp animate__delay-1s"
+           style="font-size: clamp(1rem, 4vw, 1.8rem); text-shadow: 0 1px 3px rgba(255,255,255,0.9);">
+            It's been a long time, see you at the wedding
+        </p>
         
         <p class="font-title text-black font-bold tracking-[0.1em] mt-2 whitespace-nowrap animate__animated animate__fadeInUp animate__delay-1s"
-           style="font-size: clamp(1.2rem, 5vw, 2.2rem); text-shadow: 0 1px 3px rgba(255,255,255,0.9);">
+           style="font-size: clamp(1.2rem, 4.5vw, 2rem); text-shadow: 0 1px 3px rgba(255,255,255,0.9);">
             02.05.2026
         </p>
     </div>
 
     <!-- KHỐI DƯỚI CÙNG: Lời mời -->
-    <div class="z-20 absolute bottom-0 md:bottom-10 text-center animate__animated animate__fadeInUp animate__delay-2s w-full px-4 flex flex-col items-center">
+    <div class="z-20 text-center animate__animated animate__fadeInUp animate__delay-2s w-full px-4 flex flex-col items-center">
         <h3 class="font-bride-groom text-black whitespace-nowrap" 
-            style="font-size: clamp(1.5rem, 7.5vw, 4.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+            style="font-size: clamp(1.5rem, 6.5vw, 3.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
             Trân Trọng Kính Mời
         </h3>
         <div id="guest-box" class="w-full hidden mt-2 flex justify-center">
-            <h3 id="guest-name" class="font-title text-wedding-black tracking-wide capitalize font-bold whitespace-nowrap" 
-                style="font-size: clamp(1.5rem, 6vw, 2.8rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+            <h3 id="guest-name" class="font-title text-wedding-red tracking-wide capitalize font-bold whitespace-nowrap" 
+                style="font-size: clamp(1.5rem, 5.5vw, 2.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
             </h3>
         </div>
     </div>
