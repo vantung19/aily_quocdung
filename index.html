@@ -21,7 +21,7 @@
       /* CÀI ĐẶT FONT FZ MANSTEIN CHO TÊN CÔ DÂU CHÚ RỂ */
       @font-face {
         font-family: 'FzManstein';
-        src: url('FzManstein.ttf') format('truetype');
+        src: url('LuxuriousScript-Regular.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
       }
@@ -68,63 +68,28 @@
 
       /* TOÀN BỘ TRANG SỬ DỤNG TIMES NEW ROMAN */
       body {
-        background-color: #fcfcfc;
+        background-color: #f2f2f2;
         color: #333;
         overflow-x: hidden;
         font-family: 'Times New Roman', Times, serif;
       }
 
       /* Class áp dụng font chữ */
-      .font-bride-groom { 
-        font-family: 'FzManstein', 'Times New Roman', serif; 
-      }
+      .font-bride-groom { font-family: 'FzManstein', 'Times New Roman', serif; }
+      .font-harukaze { font-family: 'FzHarukaze', 'Times New Roman', serif; }
+      .font-lovebird { font-family: 'FzLovebird', 'Times New Roman', serif; }
+      .font-aureligena { font-family: 'KDAureligena', 'Times New Roman', serif; }
+      .font-amira { font-family: 'FzAmira', 'Times New Roman', serif; }
+      .font-voire { font-family: 'FzVoire', 'Times New Roman', serif; }
       
-      .font-harukaze {
-        font-family: 'FzHarukaze', 'Times New Roman', serif;
-      }
-
-      .font-lovebird {
-        font-family: 'FzLovebird', 'Times New Roman', serif;
-      }
-
-      .font-aureligena {
-        font-family: 'KDAureligena', 'Times New Roman', serif;
-      }
-
-      .font-amira {
-        font-family: 'FzAmira', 'Times New Roman', serif;
-      }
-
-      .font-voire {
-        font-family: 'FzVoire', 'Times New Roman', serif;
-      }
-      
-      /* Các class định dạng chữ khác (quy về Times New Roman) */
       .font-title, .font-body, .font-accent, .font-script, .font-caveat { 
         font-family: 'Times New Roman', Times, serif; 
       }
       
-      /* Riêng font-script và font-caveat cho in nghiêng để tạo điểm nhấn */
-      .font-script, .font-caveat {
-        font-style: italic;
-      }
-
+      .font-script, .font-caveat { font-style: italic; }
       .text-wedding-red { color: #b70000; }
       .bg-wedding-red { background-color: #b70000; }
 
-      /* Đường kẻ đỏ uốn lượn ở Header */
-      .red-curve-line {
-        position: absolute;
-        top: 50%;
-        left: -10%;
-        width: 120%;
-        height: 100px;
-        transform: translateY(-50%);
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      /* Animations */
       @keyframes soft-float {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-8px); }
@@ -137,100 +102,77 @@
       }
       .animate-spin-slow { animation: slow-spin 15s linear infinite; }
       
+      /* FIX LỖI HỘP QUÀ TẠI ĐÂY */
       .vs-qr-content { display: none; }
-      .vs-qr-content.show { display: block; animation: fadeInUp 0.5s; }
+      .vs-qr-content.show { display: flex; animation: fadeInUp 0.5s; }
     </style>
 </head>
 <body class="antialiased">
 
-<div id="wrapper" class="min-h-screen max-w-[640px] mx-auto bg-white shadow-2xl relative overflow-hidden pb-10">
+<div id="wrapper" class="min-h-screen w-full max-w-[1200px] mx-auto bg-white shadow-2xl relative overflow-hidden pb-10 flex flex-col items-center">
     
-<!-- PHẦN HEADER ĐÃ ĐƯỢC FIX TOÀN BỘ FONT SIZE LINH HOẠT -->
-<header class="relative overflow-hidden h-[95vh] w-full">
-    <!-- Ảnh nền & Lớp phủ -->
-    <img src="https://zpi.cx/b/Js9iL.png" class="absolute inset-0 w-full h-full object-cover animate__animated animate__fadeIn" alt="Wedding Photo">
-    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none"></div>
+<!-- PHẦN HEADER -->
+<header class="relative overflow-hidden min-h-screen w-full flex flex-col justify-between items-center py-12">
+    <img src="images/bg-header.jpg" class="absolute inset-0 w-full h-full object-cover object-top md:object-[50%_25%] animate__animated animate__fadeIn z-0" alt="Wedding Photo">
+    <div class="absolute inset-0 bg-white/10 pointer-events-none z-0"></div>
 
-    <!-- 2 Chữ góc trên cùng (Our Wedding / Invitation) -->
-    <div class="absolute top-6 left-0 w-full flex justify-between px-6 text-white z-20">
-        <span class="font-aureligena capitalize drop-shadow-md" style="font-size: clamp(2.5rem, 5vw, 3.5rem);">Our Wedding</span>
-        <span class="font-aureligena capitalize drop-shadow-md" style="font-size: clamp(3.5rem, 5vw, 4.5rem);">Invitation</span>
+    <!-- KHỐI TRÊN CÙNG: Tên CDCR -->
+    <div class="z-20 absolute top-4 md:top-8 text-center animate__animated animate__fadeInDown w-full px-4 flex justify-center">
+        <h1 class="font-bride-groom text-black leading-none whitespace-nowrap" 
+            style="font-size: clamp(1.5rem, 10vw, 5.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+            Ái Ly & Quốc Dũng
+        </h1>
     </div>
 
-    <!-- KHỐI GIỮA: Ngày tháng & "You complete me" -->
-    <div class="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center z-20 px-4 text-center">
-        <!-- Ngày tháng -->
-        <div class="animate__animated animate__fadeInDown">
-            <h2 class="text-white font-title tracking-tight drop-shadow-md font-bold" style="font-size: clamp(1.5rem, 6vw, 3rem);">
-                03-05-2026
-            </h2>
-        </div>
-
-        <!-- "You complete me" - ĐÃ FIX LỖI TRÀN DÒNG -->
-        <div class="relative w-full flex justify-center items-center mt-2">
-            <h3 class="font-amira text-[#ffeb3b] leading-[1.1] transform -rotate-3 italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] animate__animated animate__fadeIn"
-                style="font-size: clamp(3.5rem, 15vw, 7rem); max-width: 95vw; word-wrap: break-word;">
-                Y2ou compl2ete me2
-            </h3>
-        </div>
-
-        <!-- "OUR WEDDING" phụ -->
-        <div class="mt-4 animate__animated animate__zoomIn animate__delay-1s">
-            <h4 class="text-white font-title tracking-[0.3em] drop-shadow-md uppercase font-bold" style="font-size: clamp(0.9rem, 3vw, 1.5rem);">
-                OUR WEDDING
-            </h4>
-        </div>
-    </div>
-
-    <!-- KHỐI DƯỚI: Tên CDCR & Khách mời -->
-    <div class="absolute inset-x-0 bottom-[8vh] flex flex-col items-center z-20 px-4">
+    <!-- KHỐI GIỮA: We got Married & Ngày tháng -->
+    <div class="z-20 flex flex-col items-center text-center mt-auto mb-auto w-full px-4"> 
+        <h2 class="font-amira text-white leading-[0.8] whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] animate__animated animate__zoomIn flex flex-col items-start"
+            style="font-size: clamp(4.5rem, 18vw, 11rem); transform: rotate(-3deg);">
+            <span>W2e got2</span>
+            <!-- ml-[1.6em] giúp đẩy chữ Married lùi vào đúng ngay cuối chữ got -->
+            <span class="ml-[1.6em]">M2arried</span>
+        </h2>
         
-        <!-- Tên CDCR -->
-        <div class="flex justify-center items-center gap-2 text-white flex-nowrap whitespace-nowrap animate__animated animate__fadeInUp animate__delay-2s mb-[4vh]">
-            <span class="font-bride-groom leading-none pt-2 text-center" 
-                  style="font-size: clamp(1.2rem, 9vw, 3.8rem); text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
-                Quốc Dũng
-            </span>
-            <span class="text-wedding-red font-bold mx-1" style="font-size: clamp(1.5rem, 5vw, 2.5rem);">囍</span>
-            <span class="font-bride-groom leading-none pt-2 text-center" 
-                  style="font-size: clamp(1.2rem, 9vw, 3.8rem); text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
-                Ái Ly
-            </span>
-        </div>
+        
+        <p class="font-title text-black font-bold tracking-[0.1em] mt-2 whitespace-nowrap animate__animated animate__fadeInUp animate__delay-1s"
+           style="font-size: clamp(1.2rem, 5vw, 2.2rem); text-shadow: 0 1px 3px rgba(255,255,255,0.9);">
+            02.05.2026
+        </p>
+    </div>
 
-        <!-- Khối Khách Mời -->
-        <div id="guest-box" class="text-center w-full hidden animate__animated animate__fadeInUp animate__delay-3s">
-            <p class="font-lovebird text-white tracking-[0.05em] mb-1 opacity-90" 
-               style="font-size: clamp(1.1rem, 4vw, 1.6rem); text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
-                Trân trọng kính mời
-            </p>
-            <h3 id="guest-name" class="font-script text-[#ffeb3b] tracking-wide capitalize font-bold" 
-                style="font-size: clamp(1.8rem, 8vw, 3rem); text-shadow: 0 2px 8px rgba(0,0,0,1);">
+    <!-- KHỐI DƯỚI CÙNG: Lời mời -->
+    <div class="z-20 absolute bottom-0 md:bottom-10 text-center animate__animated animate__fadeInUp animate__delay-2s w-full px-4 flex flex-col items-center">
+        <h3 class="font-bride-groom text-black whitespace-nowrap" 
+            style="font-size: clamp(1.5rem, 7.5vw, 4.5rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+            Trân Trọng Kính Mời
+        </h3>
+        <div id="guest-box" class="w-full hidden mt-2 flex justify-center">
+            <h3 id="guest-name" class="font-title text-wedding-black tracking-wide capitalize font-bold whitespace-nowrap" 
+                style="font-size: clamp(1.5rem, 6vw, 2.8rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
             </h3>
         </div>
     </div>
 </header>
 
     <!-- WELCOME SECTION -->
-    <section class="pt-16 pb-20 px-8 text-center bg-[#fcfcfc]">
+    <section class="pt-16 pb-4 px-4 w-full flex flex-col items-center text-center bg-[#fcfcfc]">
         <div class="relative flex justify-center items-center mb-10 wow animate__animated animate__zoomIn">
-            <img src="https://api.vesey.vn/templates/vs-template-6/img-content-1-1.webp" class="w-40 h-40 md:w-48 md:h-48 animate-spin-slow drop-shadow-lg" alt="CD Disk">
-            <img src="https://api.vesey.vn/templates/vs-template-6/img-content-1-2.webp" class="absolute w-24 h-24 md:w-[110px] md:h-[110px] m-auto rounded-full object-cover border-[3px] border-white shadow-inner" alt="Couple">
+            <img src="https://api.vesey.vn/templates/vs-template-6/img-content-1-1.webp" class="w-40 h-40 md:w-56 md:h-56 animate-spin-slow drop-shadow-lg" alt="CD Disk">
+            <img src="images/1.svg" class="absolute w-24 h-24 md:w-[130px] md:h-[130px] m-auto rounded-full object-cover border-[3px] border-white shadow-inner" alt="Couple">
         </div>
         
-        <!-- Sử dụng font Lovebird cho tiêu đề -->
-        <h1 class="font-lovebird text-3xl md:text-5xl text-wedding-red mb-8 wow animate__animated animate__fadeInUp capitalize drop-shadow-sm">
+        <h1 class="font-lovebird text-wedding-red mb-8 wow animate__animated animate__fadeInUp capitalize drop-shadow-sm whitespace-nowrap" style="font-size: clamp(1.5rem, 6.5vw, 3.75rem);">
             Welcome To Our Wedding
         </h1>
         
-        <div class="max-w-[90%] mx-auto font-body text-xl leading-relaxed text-gray-700 space-y-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
-            <p>Tình yêu là hành trình dài, và hôm nay chúng mình đã tìm thấy bến đỗ.</p>
-            <p>Trong khoảnh khắc trọng đại ấy, chúng mình không mong gì hơn ngoài sự hiện diện của bạn — người từng góp phần tạo nên những kỷ niệm đáng quý trong cuộc sống này.</p>
-            <p>Mong được cùng bạn chia sẻ niềm vui, để hạnh phúc ấy trở nên thật trọn vẹn.</p>
+        <div class="w-full flex flex-col items-center mx-auto font-body leading-relaxed text-gray-700 space-y-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+            <p class="whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.5rem);">Tình yêu là hành trình dài, và hôm nay chúng mình đã tìm thấy bến đỗ.</p>
+            <p class="whitespace-nowrap" style="font-size: clamp(0.55rem, 2vw, 1.5rem);">Trong khoảnh khắc trọng đại ấy, chúng mình không mong gì hơn ngoài sự hiện diện của bạn</p>
+            <p class="whitespace-nowrap" style="font-size: clamp(0.55rem, 2vw, 1.5rem);">người từng góp phần tạo nên những kỷ niệm đáng quý trong cuộc sống này.</p>
+            <p class="whitespace-nowrap" style="font-size: clamp(0.65rem, 2.5vw, 1.5rem);">Mong được cùng bạn chia sẻ niềm vui, để hạnh phúc ấy trở nên thật trọn vẹn.</p>
         </div>
         
-        <img src="https://api.vesey.vn/templates/vs-template-6/img-content-1-3.webp" class="w-full mt-12 opacity-80 wow animate__animated animate__fadeIn" alt="Decoration Line">
+        <img src="images/2.svg" class="w-full md:max-w-4xl mx-auto mt-6 opacity-80 wow animate__animated animate__fadeIn" alt="Decoration Line">
     </section>
 
     <!-- FAMILIES SECTION -->
@@ -241,121 +183,119 @@
             <div class="h-[1px] w-20 bg-wedding-red opacity-30"></div>
         </div>
 
-        <div class="grid grid-cols-2 gap-8 mb-16">
+        <!-- ĐÃ FIX: Giảm khoảng cách mb-16 xuống mb-6 để thu hẹp khoảng trống phía dưới -->
+        <div class="w-full flex justify-center gap-8 md:gap-24 max-w-4xl mx-auto mb-6 px-2">
             <!-- Nhà Gái -->
-            <div class="wow animate__animated animate__fadeInLeft">
-                <h3 class="font-harukaze text-2xl tracking-widest text-wedding-red mb-4">NHÀ GÁI</h3>
-                <div class="font-body text-lg text-gray-800 leading-relaxed">
-                    <p class="font-bold">Ông: Huỳnh Tấn Lực</p>
-                    <p class="font-bold">Bà: Lê Thị Thu Hồng</p>
+            <div class="wow animate__animated animate__fadeInLeft flex flex-col items-center">
+                <h3 class="font-title text-gray-800 mb-2 whitespace-nowrap" style="font-size: clamp(0.9rem, 3.5vw, 1.5rem);">Nhà Gái</h3>
+                <div class="font-title text-gray-800 leading-relaxed flex flex-col items-center">
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Ông Huỳnh Tấn Lực</p>
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Bà Lê Thị Thu Hồng</p>
+                    <p class="text-gray-600 mt-1 whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.15rem);">Xã Phù Cát, Gia Lai</p>
                 </div>
             </div>
             <!-- Nhà Trai -->
-            <div class="wow animate__animated animate__fadeInRight">
-                <h3 class="font-harukaze text-2xl tracking-widest text-wedding-red mb-4">NHÀ TRAI</h3>
-                <div class="font-body text-lg text-gray-800 leading-relaxed">
-                    <p class="font-bold">Ông: Sơn</p>
-                    <p class="font-bold">Bà: Sáng</p>
+            <div class="wow animate__animated animate__fadeInRight flex flex-col items-center">
+                <h3 class="font-title text-gray-800 mb-2 whitespace-nowrap" style="font-size: clamp(0.9rem, 3.5vw, 1.5rem);">Nhà Trai</h3>
+                <div class="font-title text-gray-800 leading-relaxed flex flex-col items-center">
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Ông Trần Văn Sơn</p>
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Bà Ngô Thị Sáng</p>
+                    <p class="text-gray-600 mt-1 whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.15rem);">Phường Sông Cầu, Đắk Lắk</p>
                 </div>
             </div>
         </div>
 
-        <div class="flex items-center justify-center gap-6 mb-10 wow animate__animated animate__zoomIn">
+        <!-- ĐÃ FIX: Giảm khoảng cách mb-10 xuống mb-4 -->
+        <div class="flex items-center justify-center gap-6 mb-4 wow animate__animated animate__zoomIn">
             <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#b70000] opacity-40"></div>
             <i class="fas fa-heart text-wedding-red text-[10px]"></i>
             <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#b70000] opacity-40"></div>
         </div>
 
-        <div class="wow animate__animated animate__fadeInUp">
-            <!-- Đổi sang Fz-Lovebird -->
-            <h2 class="font-lovebird text-4xl md:text-5xl text-wedding-red mb-4 capitalize">Trân trọng kính mời</h2>
-            <p class="font-title text-xl mb-1 text-gray-900 font-bold">Bạn cùng gia đình</p>
-            <p class="font-body italic text-gray-500 text-sm mb-10">(Tới dự Lễ Thành Hôn của hai con chúng tôi)</p>
+        <div class="wow animate__animated animate__fadeInUp flex flex-col items-center w-full">
+            <h2 class="font-bride-groom text-wedding-red mb-4 capitalize whitespace-nowrap" style="font-size: clamp(1.8rem, 10vw, 3.75rem);">Trân trọng kính mời</h2>
+            <p class="font-title mb-1 text-gray-900 font-bold whitespace-nowrap" style="font-size: clamp(1rem, 3.5vw, 1.5rem);">Bạn cùng gia đình</p>
+            <p class="font-body italic text-gray-500 mb-10 whitespace-nowrap" style="font-size: clamp(0.65rem, 2.5vw, 1rem);">(Tới dự Lễ Vu Quy của hai con chúng tôi)</p>
         </div>
 
-        <!-- Tên Trung Tâm Lần 2 -->
-        <div class="flex items-center justify-center gap-2 sm:gap-6 mb-12 flex-nowrap whitespace-nowrap px-4 wow animate__animated animate__fadeInUp">
-            <p class="font-bride-groom text-4xl sm:text-5xl md:text-4xl text-wedding-red leading-none pt-2">Quốc Dũng</p>
-            <i class="fas fa-heart text-wedding-red text-xl sm:text-2xl animate-soft-float mx-1"></i>
-            <p class="font-bride-groom text-4xl sm:text-5xl md:text-4xl text-wedding-red leading-none pt-2">Ái Ly</p>
+        <div class="flex items-center justify-center gap-2 sm:gap-6 mb-12 flex-nowrap whitespace-nowrap px-2 w-full wow animate__animated animate__fadeInUp">
+            <p class="font-bride-groom text-wedding-red leading-none pt-2 whitespace-nowrap" style="font-size: clamp(2rem, 8vw, 3.75rem);">Ái Ly</p>
+            <i class="fas fa-heart text-wedding-red animate-soft-float mx-1 md:mx-4 mt-2 md:mt-1" style="font-size: clamp(1.2rem, 4vw, 2.25rem);"></i>
+            <p class="font-bride-groom text-wedding-red leading-none pt-2 whitespace-nowrap" style="font-size: clamp(2rem, 8vw, 3.75rem);">Quốc Dũng</p>
         </div>
 
         <!-- Chi Tiết Sự Kiện -->
-        <div class="space-y-4 bg-gray-50 p-8 rounded-2xl border border-dashed border-wedding-red/20 wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
-            <p class="font-title text-lg text-wedding-red font-bold">Tổ chức vào lúc 11 giờ 00</p>
-            <p class="font-title text-xl text-gray-800 font-bold">Thứ Bảy, ngày 03 tháng 05 năm 2026</p>
-            <p class="font-body italic text-gray-500 text-base">(Tức ngày 16 tháng 03 năm Bính Ngọ)</p>
+        <div class="space-y-4 bg-gray-50 p-6 md:p-12 w-[95%] md:max-w-3xl mx-auto rounded-2xl border border-dashed border-wedding-red/20 flex flex-col items-center wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+            <p class="font-title text-wedding-red font-bold whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.25rem);">Tổ chức vào lúc 11 giờ 00</p>
+            <p class="font-title text-gray-800 font-bold whitespace-nowrap" style="font-size: clamp(0.9rem, 4vw, 1.5rem);">Thứ Bảy, ngày 02 tháng 05 năm 2026</p>
+            <p class="font-body italic text-gray-500 whitespace-nowrap" style="font-size: clamp(0.7rem, 3vw, 1.125rem);">(Tức ngày 16 tháng 03 năm Bính Ngọ)</p>
             
-            <div class="py-4">
-                <p class="font-title text-lg font-bold text-gray-800 mb-1">Tại gia đình Nhà Gái:</p>
-                <p class="font-body text-xl text-gray-700 font-bold">Nhà Hàng Cát Việt</p>
+            <div class="py-4 flex flex-col items-center">
+                <p class="font-title font-bold text-gray-800 mb-1 whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.25rem);">Tại gia đình Nhà Gái:</p>
+                <p class="font-body text-gray-700 font-bold whitespace-nowrap" style="font-size: clamp(1.2rem, 5vw, 1.875rem);">Nhà Hàng Cát Việt</p>
             </div>
             
-            <p class="font-body text-gray-600 italic mt-2">Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!</p>
+            <p class="font-body text-gray-600 italic mt-2 whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1.125rem);">Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!</p>
         </div>
     </section>
 
     <!-- QUOTE & PHOTOS -->
-    <section class="w-[90%] mx-auto py-10 text-center">
-        <h1 class="font-harukaze text-3xl mb-6 flex items-center justify-center gap-3 wow animate__animated animate__fadeInDown text-wedding-red">
+    <section class="w-full px-4 md:max-w-4xl mx-auto py-10 flex flex-col items-center text-center">
+        <h1 class="font-harukaze flex items-center justify-center gap-3 wow animate__animated animate__fadeInDown text-wedding-red mb-6 whitespace-nowrap" style="font-size: clamp(1.5rem, 6vw, 3rem);">
             <span>❤️</span> My Lover <span>❤️</span>
         </h1>
         
-        <div class="flex justify-center items-start gap-4 md:gap-8 mb-10">
-            <div class="flex flex-col items-center wow animate__animated animate__fadeInLeft w-28 md:w-32">
-                <img src="https://api.vesey.vn/templates/vs-template-6/img-content-2-1.webp" class="w-24 h-24 rounded-full object-cover mb-3 shadow-md" alt="Chú rể">
-                <p class="font-title text-sm mb-1 opacity-60">Chú rể</p>
-                <h3 class="font-bride-groom text-3xl md:text-[1.3rem] text-wedding-red leading-none pt-1">Quốc Dũng</h3>
+        <div class="flex justify-center items-start gap-4 md:gap-16 w-full mb-10">
+            <div class="flex flex-col items-center wow animate__animated animate__fadeInLeft">
+                <img src="images/3.svg" class="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover mb-3 shadow-md" alt="Chú rể">
+                <p class="font-title opacity-60 whitespace-nowrap" style="font-size: clamp(0.8rem, 3vw, 1.125rem);">Chú rể</p>
+                <h3 class="font-bride-groom text-wedding-red leading-none pt-1 whitespace-nowrap" style="font-size: clamp(1.5rem, 6vw, 2.2rem);">Quốc Dũng</h3>
             </div>
             
-            <!-- Canh giữa trái tim hoàn hảo so với ảnh (chiều cao h-24 bằng với ảnh) -->
-            <div class="h-24 flex items-center">
-                <i class="fas fa-heart text-wedding-red text-xl animate__animated animate__pulse animate__infinite drop-shadow-sm"></i>
+            <div class="h-24 md:h-40 flex items-center">
+                <i class="fas fa-heart text-wedding-red animate__animated animate__pulse animate__infinite drop-shadow-sm" style="font-size: clamp(1.2rem, 4vw, 1.875rem);"></i>
             </div>
             
-            <div class="flex flex-col items-center wow animate__animated animate__fadeInRight w-28 md:w-32">
-                <img src="https://api.vesey.vn/templates/vs-template-6/img-content-2-2.webp" class="w-24 h-24 rounded-full object-cover mb-3 shadow-md" alt="Cô dâu">
-                <p class="font-title text-sm mb-1 opacity-60">Cô Dâu</p>
-                <h3 class="font-bride-groom text-3xl md:text-[1.3rem] text-wedding-red leading-none pt-1">Ái Ly</h3>
+            <div class="flex flex-col items-center wow animate__animated animate__fadeInRight">
+                <img src="images/4.svg" class="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover mb-3 shadow-md" alt="Cô dâu">
+                <p class="font-title opacity-60 whitespace-nowrap" style="font-size: clamp(0.8rem, 3vw, 1.125rem);">Cô Dâu</p>
+                <h3 class="font-bride-groom text-wedding-red leading-none pt-1 whitespace-nowrap" style="font-size: clamp(1.5rem, 6vw, 2.2rem);">Ái Ly</h3>
             </div>
         </div>
 
-        <p class="font-body text-lg italic text-gray-600 wow animate__animated animate__fadeIn px-4">
-            "Hãy để tình yêu diễn biến thật tự nhiên, đã là duyên thì cũng chẳng sợ lạc đường."
-        </p>
+        <div class="font-body italic text-gray-600 wow animate__animated animate__fadeIn flex flex-col items-center w-full space-y-2">
+            <p class="whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1.5rem);">"Hãy để tình yêu diễn biến thật tự nhiên,</p>
+            <p class="whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1.5rem);">đã là duyên thì cũng chẳng sợ lạc đường."</p>
+        </div>
 
-        <img src="https://api.vesey.vn/templates/vs-template-6/img-content-3-1.webp" class="w-full mt-10 rounded-xl shadow-lg wow animate__animated animate__fadeIn" alt="Couple">
+        <img src="images/5.svg" class="w-[90%] mt-10 rounded-xl shadow-lg wow animate__animated animate__fadeIn" alt="Couple">
     </section>
 
     <!-- CALENDAR SECTION -->
-    <section class="py-16 bg-[#fffcf9]">
-        <div class="w-[90%] mx-auto relative rounded-2xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-12 wow animate__animated animate__zoomIn">
-            <img src="https://api.vesey.vn/templates/vs-template-6/img-content-4-1.webp" class="w-full block object-cover h-[350px] md:h-auto" alt="Lịch">
-            <!-- Thêm lớp overlay đen mờ để làm các con số và trái tim nổi bật hơn -->
+    <section class="py-16 w-full bg-[#fffcf9] flex flex-col items-center">
+        <div class="w-[90%] md:max-w-2xl relative rounded-2xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.2)] mb-12 wow animate__animated animate__zoomIn">
+            <img src="images/6.svg" class="w-full block object-cover h-[350px] md:h-auto" alt="Lịch">
             <div class="absolute inset-0 bg-black/35 pointer-events-none"></div>
             
             <div class="absolute inset-0 flex flex-col justify-center items-center pb-12 md:pb-16 text-white z-10">
-                <div class="grid grid-cols-7 w-[85%] text-center font-title text-base md:text-xl gap-y-3 md:gap-y-4 drop-shadow-lg">
-                    <!-- Header Lịch -->
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">S</div>
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">M</div>
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">T</div>
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">W</div>
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">T</div>
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">F</div>
-                    <div class="text-xs md:text-sm font-bold uppercase text-gray-200 mb-2">S</div>
+                <div class="grid grid-cols-7 w-[85%] text-center font-title text-base md:text-2xl gap-y-3 md:gap-y-6 drop-shadow-lg">
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">S</div>
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">M</div>
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">T</div>
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">W</div>
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">T</div>
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">F</div>
+                    <div class="text-xs md:text-base font-bold uppercase text-gray-200 mb-2">S</div>
                     
-                    <!-- Ngày -->
                     <div></div><div></div><div></div><div></div><div></div>
                     <div class="flex justify-center items-center">1</div>
-                    <div class="flex justify-center items-center">2</div>
                     
-                    <!-- Ngày 3 được bao bọc cẩn thận bằng relative để trái tim bám đúng vị trí -->
                     <div class="relative flex justify-center items-center">
-                        <span class="relative z-10 text-white font-bold text-2xl md:text-3xl drop-shadow-md">3</span>
-                        <!-- Trái tim nhịp đập ngay sau số 3 -->
-                        <i class="fas fa-heart absolute text-[#b70000] text-4xl md:text-5xl animate__animated animate__pulse animate__infinite opacity-95 drop-shadow-[0_0_10px_rgba(183,0,0,0.8)]" style="z-index: -1;"></i>
+                        <span class="relative z-10 text-white font-bold text-2xl md:text-4xl drop-shadow-md">2</span>
+                        <i class="fas fa-heart absolute text-[#b70000] text-4xl md:text-[3.5rem] animate__animated animate__pulse animate__infinite opacity-95 drop-shadow-[0_0_10px_rgba(183,0,0,0.8)]" style="z-index: -1;"></i>
                     </div>
+                    
+                    <div class="flex justify-center items-center">3</div>
                     <div class="flex justify-center items-center">4</div>
                     <div class="flex justify-center items-center">5</div>
                     <div class="flex justify-center items-center">6</div>
@@ -392,92 +332,94 @@
                 </div>
             </div>
 
-            <!-- Banner Lịch -->
-            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-12 pb-4 text-center text-white">
-                <p class="font-title text-sm md:text-lg tracking-[0.2em] mb-1 font-bold uppercase drop-shadow-md">Chủ Nhật, 03/05/2026</p>
-                <p class="font-body text-xs md:text-sm opacity-90 tracking-wide drop-shadow-md">Âm lịch 17/03 Bính Ngọ | 11:00 AM</p>
+            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-12 pb-4 md:pb-6 text-center text-white flex flex-col items-center">
+                <p class="font-title tracking-[0.2em] mb-1 font-bold uppercase drop-shadow-md whitespace-nowrap" style="font-size: clamp(0.7rem, 3vw, 1.25rem);">Thứ Bảy, 02/05/2026</p>
+                <p class="font-body opacity-90 tracking-wide drop-shadow-md whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Âm lịch 16/03 Bính Ngọ | 11:00 AM</p>
             </div>
         </div>
 
         <!-- COUNTDOWN -->
-        <div class="w-[85%] mx-auto text-center wow animate__animated animate__fadeInUp">
-            <!-- Đổi sang Times New Roman in hoa và in đậm -->
-            <h2 class="font-title text-2xl md:text-3xl font-bold uppercase tracking-wider mb-8 text-wedding-red">Đếm ngược đến ngày trọng đại</h2>
-            <div class="flex justify-center items-center gap-6 md:gap-10">
+        <div class="w-[95%] mx-auto text-center wow animate__animated animate__fadeInUp flex flex-col items-center">
+            <h2 class="font-title font-bold uppercase tracking-wider mb-8 md:mb-12 text-wedding-red whitespace-nowrap" style="font-size: clamp(1rem, 4.5vw, 2.25rem);">Đếm ngược đến ngày trọng đại</h2>
+            <div class="flex justify-center items-center gap-4 md:gap-16 w-full">
                 <div class="flex flex-col items-center">
-                    <p id="days" class="text-4xl font-bold text-wedding-red mb-1">00</p>
-                    <p class="text-xs text-gray-600 font-accent tracking-widest uppercase">Ngày</p>
+                    <p id="days" class="font-bold text-wedding-red mb-1 whitespace-nowrap" style="font-size: clamp(1.8rem, 8vw, 3.75rem);">00</p>
+                    <p class="text-gray-600 font-accent tracking-widest uppercase whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Ngày</p>
                 </div>
                 <div class="flex flex-col items-center">
-                    <p id="hours" class="text-4xl font-bold text-wedding-red mb-1">00</p>
-                    <p class="text-xs text-gray-600 font-accent tracking-widest uppercase">Giờ</p>
+                    <p id="hours" class="font-bold text-wedding-red mb-1 whitespace-nowrap" style="font-size: clamp(1.8rem, 8vw, 3.75rem);">00</p>
+                    <p class="text-gray-600 font-accent tracking-widest uppercase whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Giờ</p>
                 </div>
                 <div class="flex flex-col items-center">
-                    <p id="minutes" class="text-4xl font-bold text-wedding-red mb-1">00</p>
-                    <p class="text-xs text-gray-600 font-accent tracking-widest uppercase">Phút</p>
+                    <p id="minutes" class="font-bold text-wedding-red mb-1 whitespace-nowrap" style="font-size: clamp(1.8rem, 8vw, 3.75rem);">00</p>
+                    <p class="text-gray-600 font-accent tracking-widest uppercase whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Phút</p>
                 </div>
                 <div class="flex flex-col items-center">
-                    <p id="seconds" class="text-4xl font-bold text-wedding-red mb-1">00</p>
-                    <p class="text-xs text-gray-600 font-accent tracking-widest uppercase">Giây</p>
+                    <p id="seconds" class="font-bold text-wedding-red mb-1 whitespace-nowrap" style="font-size: clamp(1.8rem, 8vw, 3.75rem);">00</p>
+                    <p class="text-gray-600 font-accent tracking-widest uppercase whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Giây</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- MAP SECTION -->
-    <section class="py-16 text-center">
-        <img src="https://api.vesey.vn/templates/vs-template-6/img-content-6-1.webp" class="w-full mb-6 wow animate__animated animate__fadeIn" alt="Map top">
+    <section class="py-16 px-4 w-full text-center flex flex-col items-center">
+        <img src="images/7.svg" class="w-full md:max-w-4xl mb-6 wow animate__animated animate__fadeIn" alt="Map top">
         
-        <div class="flex justify-center items-center gap-4 font-body text-xl italic text-gray-600 mb-6 wow animate__animated animate__fadeInDown">
-            <p>Our</p><p class="text-wedding-red font-bold">Sweet</p><p>Day</p>
+        <div class="flex justify-center items-center gap-3 md:gap-6 font-body italic text-gray-600 mb-6 md:mb-10 wow animate__animated animate__fadeInDown">
+            <p class="whitespace-nowrap" style="font-size: clamp(1rem, 4vw, 1.875rem);">Our</p>
+            <p class="text-wedding-red font-bold whitespace-nowrap" style="font-size: clamp(1rem, 4vw, 1.875rem);">Sweet</p>
+            <p class="whitespace-nowrap" style="font-size: clamp(1rem, 4vw, 1.875rem);">Day</p>
         </div>
         
-        <div class="relative overflow-hidden mb-8 wow animate__animated animate__zoomIn">
-            <img src="https://api.vesey.vn/templates/vs-template-6/img-content-6-2.webp" class="w-1/2 mx-auto rounded-xl shadow-md" alt="Ring">
+        <div class="relative overflow-hidden mb-8 wow animate__animated animate__zoomIn w-full flex justify-center">
+            <img src="images/8.svg" class="w-1/2 md:w-1/3 rounded-xl shadow-md" alt="Ring">
         </div>
 
-        <!-- Tiêu đề dùng Harukaze -->
-        <h1 class="font-harukaze text-4xl text-wedding-red mb-4 wow animate__animated animate__fadeInUp">Địa chỉ</h1>
-        <p class="font-body text-lg text-gray-700 mb-8 px-6 wow animate__animated animate__fadeInUp font-bold">
+        <h1 class="font-harukaze text-wedding-red mb-4 wow animate__animated animate__fadeInUp whitespace-nowrap" style="font-size: clamp(1.8rem, 7vw, 3.75rem);">Địa chỉ</h1>
+        <p class="font-body text-gray-700 mb-8 wow animate__animated animate__fadeInUp font-bold whitespace-nowrap" style="font-size: clamp(0.6rem, 2.8vw, 1.5rem);">
             Nhà Hàng Tiệc Cưới Cát Việt, Số 38 Trần Quốc Toản, Phù Cát, Gia Lai
         </p>
 
-        <a href="https://maps.app.goo.gl/9hTR5UWKV4JRJYdo7" target="_blank" class="inline-block bg-wedding-red text-white font-title px-8 py-4 rounded-full hover:bg-red-800 transition-colors shadow-xl wow animate__animated animate__bounceIn">
+        <a href="https://maps.app.goo.gl/9hTR5UWKV4JRJYdo7" target="_blank" class="inline-block bg-wedding-red text-white font-title px-6 py-3 md:px-10 md:py-5 rounded-full hover:bg-red-800 transition-colors shadow-xl wow animate__animated animate__bounceIn whitespace-nowrap" style="font-size: clamp(0.9rem, 3.5vw, 1.25rem);">
             <i class="fas fa-map-marker-alt mr-2"></i> Mở trong Google Map
         </a>
     </section>
 
     <!-- QUOTE 2 -->
-    <section class="w-[90%] mx-auto py-12 text-center">
-        <div class="font-body text-xl italic text-gray-700 leading-relaxed max-w-[85%] mx-auto mb-10 wow animate__animated animate__fadeIn">
-            <p class="font-bold text-gray-800">Lấy yêu thương làm lời thề,<br>Lấy năm tháng làm chứng nhân,</p>
-            <p>Để mai này dù tóc bạc, lòng vẫn nguyên vẹn như hôm nay</p>
+    <section class="w-full px-4 md:max-w-4xl mx-auto py-12 flex flex-col items-center text-center">
+        <div class="font-body italic text-gray-700 leading-relaxed w-full flex flex-col items-center mb-10 wow animate__animated animate__fadeIn">
+            <p class="font-bold text-gray-800 whitespace-nowrap" style="font-size: clamp(0.85rem, 3.5vw, 1.875rem);">Lấy yêu thương làm lời thề,</p>
+            <p class="font-bold text-gray-800 whitespace-nowrap" style="font-size: clamp(0.85rem, 3.5vw, 1.875rem);">Lấy năm tháng làm chứng nhân,</p>
+            <p class="whitespace-nowrap mt-2" style="font-size: clamp(0.65rem, 2.5vw, 1.875rem);">Để mai này dù tóc bạc, lòng vẫn nguyên vẹn như hôm nay</p>
         </div>
-        <img src="https://api.vesey.vn/templates/vs-template-6/img-content-7-1.webp" class="w-full rounded-2xl shadow-lg wow animate__animated animate__zoomIn" alt="Couple">
+        <img src="images/9.svg" class="w-[90%] rounded-2xl shadow-lg wow animate__animated animate__zoomIn" alt="Couple">
     </section>
 
     <!-- RSVP FORM -->
-    <section class="py-16 px-6 bg-white text-center">
-        <div class="max-w-md mx-auto border border-gray-100 rounded-3xl p-8 shadow-2xl wow animate__animated animate__fadeInUp">
+    <section class="py-16 px-4 w-full bg-white text-center flex flex-col items-center">
+        <div class="w-[95%] md:max-w-xl border border-gray-100 rounded-3xl p-6 md:p-12 shadow-2xl wow animate__animated animate__fadeInUp flex flex-col items-center">
             
             <div class="flex justify-center items-center gap-4 mb-6">
-                <div class="w-16 h-[1px] bg-wedding-red opacity-30"></div>
-                <i class="fas fa-heart text-wedding-red text-xl animate__animated animate__heartBeat animate__infinite"></i>
-                <div class="w-16 h-[1px] bg-wedding-red opacity-30"></div>
+                <div class="w-16 md:w-24 h-[1px] bg-wedding-red opacity-30"></div>
+                <i class="fas fa-heart text-wedding-red text-xl md:text-2xl animate__animated animate__heartBeat animate__infinite"></i>
+                <div class="w-16 md:w-24 h-[1px] bg-wedding-red opacity-30"></div>
             </div>
 
-            <!-- Đổi sang Fz-Lovebird -->
-            <h2 class="font-lovebird text-5xl md:text-4xl text-wedding-red mb-4 capitalize">Xác Nhận Tham Dự</h2>
-            <p class="font-body text-base text-gray-600 mb-8">Sự hiện diện của bạn là niềm vinh hạnh cho chúng tôi.<br>Vui lòng xác nhận để chúng tôi chuẩn bị chu đáo hơn.</p>
+            <h2 class="font-bold text-wedding-red mb-4 capitalize whitespace-nowrap" style="font-size: clamp(1.8rem, 7vw, 3.75rem);">Xác Nhận Tham Dự</h2>
+            <div class="font-body text-gray-600 mb-8 md:mb-10 flex flex-col items-center w-full">
+                <p class="whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.125rem);">Sự hiện diện của bạn là niềm vinh hạnh cho chúng tôi.</p>
+                <p class="whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.125rem);">Vui lòng xác nhận để chúng tôi chuẩn bị chu đáo hơn.</p>
+            </div>
 
-            <form id="confirmForm" class="space-y-6 text-left">
+            <form id="confirmForm" class="space-y-6 text-left w-full">
                 <div>
-                    <label class="block font-title font-bold text-gray-700 mb-2 text-sm"><i class="fas fa-user text-wedding-red mr-2"></i>Họ và Tên *</label>
+                    <label class="block font-title font-bold text-gray-700 mb-2 whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1rem);"><i class="fas fa-user text-wedding-red mr-2"></i>Họ và Tên *</label>
                     <input type="text" name="Họ_Tên" id="form-name-input" required placeholder="Nhập họ và tên..." class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-wedding-red outline-none font-body text-lg">
                 </div>
                 
                 <div>
-                    <label class="block font-title font-bold text-gray-700 mb-2 text-sm"><i class="fas fa-users text-wedding-red mr-2"></i>Số người tham dự *</label>
+                    <label class="block font-title font-bold text-gray-700 mb-2 whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1rem);"><i class="fas fa-users text-wedding-red mr-2"></i>Số người tham dự *</label>
                     <select required name="Số_Người" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none font-body text-lg">
                         <option value="">Chọn số người</option>
                         <option value="1">1 người</option>
@@ -489,29 +431,28 @@
                 </div>
 
                 <div>
-                    <label class="block font-title font-bold text-gray-700 mb-2 text-sm"><i class="fas fa-check-circle text-wedding-red mr-2"></i>Bạn sẽ tham dự chứ? *</label>
+                    <label class="block font-title font-bold text-gray-700 mb-2 whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1rem);"><i class="fas fa-check-circle text-wedding-red mr-2"></i>Bạn sẽ tham dự chứ? *</label>
                     <div class="space-y-3">
                         <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50">
                             <input type="radio" name="Tham_Dự" value="Có" required class="w-5 h-5 text-wedding-red">
-                            <span class="ml-3 font-body text-lg text-gray-700">Tôi sẽ tham dự</span>
+                            <span class="ml-3 font-body text-gray-700 whitespace-nowrap" style="font-size: clamp(0.9rem, 4vw, 1.25rem);">Tôi sẽ tham dự</span>
                         </label>
                         <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50">
                             <input type="radio" name="Tham_Dự" value="Không" required class="w-5 h-5 text-wedding-red">
-                            <span class="ml-3 font-body text-lg text-gray-700">Rất tiếc không thể</span>
+                            <span class="ml-3 font-body text-gray-700 whitespace-nowrap" style="font-size: clamp(0.9rem, 4vw, 1.25rem);">Rất tiếc không thể</span>
                         </label>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block font-title font-bold text-gray-700 mb-2 text-sm"><i class="fas fa-envelope-open-text text-wedding-red mr-2"></i>Lời chúc</label>
+                    <label class="block font-title font-bold text-gray-700 mb-2 whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1rem);"><i class="fas fa-envelope-open-text text-wedding-red mr-2"></i>Lời chúc</label>
                     <textarea rows="3" name="Lời_Chúc" placeholder="Gửi lời chúc đến cô dâu chú rể..." class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none font-body text-lg resize-none"></textarea>
                 </div>
 
-                <!-- Cấu hình ẩn cho FormSubmit -->
                 <input type="hidden" name="_subject" value="[THIỆP CƯỚI] Xác nhận tham dự mới!">
                 <input type="hidden" name="_captcha" value="false">
 
-                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-[#b70000] to-[#8b0000] text-white py-4 rounded-xl font-title font-bold text-lg uppercase tracking-wider shadow-lg hover:shadow-xl transition-all mt-4 flex justify-center items-center">
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-[#b70000] to-[#8b0000] text-white py-4 md:py-5 rounded-xl font-title font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all mt-4 flex justify-center items-center whitespace-nowrap" style="font-size: clamp(1rem, 4vw, 1.25rem);">
                     <i class="fas fa-paper-plane mr-2"></i> <span>Gửi Xác Nhận</span>
                 </button>
             </form>
@@ -519,41 +460,38 @@
     </section>
 
     <!-- FOOTER / MỪNG CƯỚI -->
-    <footer class="py-16 px-6 bg-gray-900 text-center rounded-t-3xl text-white">
+    <footer class="py-16 px-4 w-full bg-gray-900 text-center rounded-t-3xl text-white flex flex-col items-center">
         <div id="giftToggle" class="cursor-pointer group inline-block">
-            <svg class="w-32 h-32 mx-auto group-hover:scale-110 transition-transform" viewBox="0 0 180 240">
+            <svg class="w-32 h-32 md:w-40 md:h-40 mx-auto group-hover:scale-110 transition-transform" viewBox="0 0 180 240">
                 <rect fill="#c0392b" rx="12" height="220" width="160" y="10" x="10"></rect>
                 <text text-anchor="middle" y="132" x="90" style="font-size: 42px; font-weight: bold; fill: #f1c40f; font-family: serif;">囍</text>
                 <text text-anchor="middle" y="55" x="90" style="font-size: 10px; fill: #f8d98b; font-family: sans-serif; letter-spacing: 2px;">MỪNG CƯỚI</text>
             </svg>
-            <p class="mt-4 font-accent text-xs tracking-[0.2em] text-gray-400">NHẤN ĐỂ MỞ</p>
+            <p class="mt-4 md:mt-6 font-accent tracking-[0.2em] text-gray-400 whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 0.875rem);">NHẤN ĐỂ MỞ</p>
         </div>
 
-        <div id="qrContent" class="vs-qr-content mt-10 p-6 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20">
-            <h3 class="font-harukaze text-4xl md:text-5xl text-[#f1c40f] mb-6">Mừng cưới sớm</h3>
-            <p class="font-body text-lg text-white mb-6">Nguyễn Văn A - Sacombank - 00000000AA1</p>
-            <div class="bg-white p-3 rounded-2xl inline-block mb-6 shadow-2xl">
-                <!-- Thay link ảnh QR của bạn vào đây -->
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=STK_CUA_BAN" class="w-48 h-48 object-contain">
+        <!-- FIX: Đã xóa class flex ở div này để ẩn hoàn toàn lúc chưa nhấn -->
+        <div id="qrContent" class="vs-qr-content mt-10 md:mt-12 p-6 md:p-10 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 w-[95%] md:max-w-2xl flex-col items-center">
+            <h3 class="font-harukaze text-[#f1c40f] mb-6 whitespace-nowrap" style="font-size: clamp(1.8rem, 7vw, 3.75rem);">Mừng cưới sớm</h3>
+            <p class="font-body text-white mb-6 whitespace-nowrap" style="font-size: clamp(0.75rem, 3.5vw, 1.5rem);">Huynh Le Ai Ly - ACB - 25665987</p>
+            <div class="bg-white p-3 md:p-5 rounded-2xl inline-block mb-6 shadow-2xl">
+                <img src="https://img.vietqr.io/image/ACB-25669987-compact.png" class="w-48 h-48 md:w-64 md:h-64 object-contain">
             </div>
             <br>
-            <button onclick="document.getElementById('qrContent').classList.remove('show')" class="inline-block px-8 py-2 rounded-full border border-gray-400 text-gray-300 font-accent text-xs tracking-widest uppercase hover:bg-white hover:text-black transition-colors">Đóng hộp quà</button>
+            <button onclick="document.getElementById('qrContent').classList.remove('show')" class="inline-block px-8 py-2 md:px-10 md:py-3 rounded-full border border-gray-400 text-gray-300 font-accent tracking-widest uppercase hover:bg-white hover:text-black transition-colors whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 0.875rem);">Đóng hộp quà</button>
         </div>
     </footer>
 </div>
 
 <!-- SCRIPTS -->
 <script>
-    // Kích hoạt WOW.js cho hiệu ứng cuộn
     new WOW().init();
 
-    // 1. LOGIC LẤY TÊN KHÁCH MỜI TỪ ĐƯỜNG LINK
+    // 1. LOGIC LẤY TÊN KHÁCH MỜI
     document.addEventListener("DOMContentLoaded", function() {
-        // Lấy tên khách từ tham số URL (VD: ?to=Anh A)
         const urlParams = new URLSearchParams(window.location.search);
         let guestName = urlParams.get('to') || urlParams.get('name') || urlParams.get('guest');
 
-        // Phòng hờ trường hợp dùng đường dẫn dạng /Anh%20A (Nếu máy chủ có hỗ trợ)
         if (!guestName) {
             const pathParts = window.location.pathname.split('/').filter(Boolean);
             if (pathParts.length > 0) {
@@ -564,13 +502,10 @@
             }
         }
 
-        // Nếu phát hiện có tên khách mời
         if (guestName) {
-            // Hiển thị ở trang bìa
             document.getElementById('guest-name').innerText = guestName;
             document.getElementById('guest-box').classList.remove('hidden');
 
-            // Điền sẵn vào form xác nhận
             const nameInput = document.getElementById('form-name-input');
             if (nameInput) {
                 nameInput.value = guestName;
@@ -578,8 +513,8 @@
         }
     });
 
-    // 2. LOGIC ĐẾM NGƯỢC
-    const targetDate = new Date("May 3, 2026 11:00:00").getTime();
+    // 2. LOGIC ĐẾM NGƯỢC (02/05/2026)
+    const targetDate = new Date("May 2, 2026 11:00:00").getTime();
     function updateCountdown() {
         const now = new Date().getTime();
         const gap = targetDate - now;
@@ -605,27 +540,24 @@
         qrContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
-    // 4. LOGIC GỬI FORM XÁC NHẬN THAM DỰ QUA EMAIL
+    // 4. LOGIC GỬI FORM XÁC NHẬN THAM DỰ
     document.getElementById('confirmForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Ngăn trang tải lại
+        e.preventDefault(); 
         
         const btn = document.getElementById('submitBtn');
         const btnText = btn.querySelector('span');
         const icon = btn.querySelector('i');
         const originalText = btnText.innerText;
         
-        // Cập nhật giao diện nút khi đang gửi
         btnText.innerText = 'Đang gửi...';
         icon.className = 'fas fa-spinner fa-spin mr-2';
         btn.disabled = true;
         btn.classList.add('opacity-70', 'cursor-not-allowed');
 
-        // BƯỚC 1: THAY EMAIL CỦA BẠN VÀO ĐÂY
-        const emailTo = "EMAIL_CUA_BAN@gmail.com"; 
+        const emailTo = "lyhuynh161999@gmail.com"; 
 
         const formData = new FormData(this);
 
-        // Gửi qua FormSubmit
         fetch(`https://formsubmit.co/ajax/${emailTo}`, {
             method: "POST",
             body: formData
@@ -635,7 +567,6 @@
             alert('Cảm ơn bạn! Xác nhận tham dự đã được gửi thành công.');
             this.reset();
             
-            // Khôi phục nút
             btnText.innerText = originalText;
             icon.className = 'fas fa-paper-plane mr-2';
             btn.disabled = false;
@@ -644,7 +575,6 @@
         .catch(error => {
             alert('Có lỗi xảy ra khi gửi, vui lòng thử lại sau.');
             
-            // Khôi phục nút
             btnText.innerText = originalText;
             icon.className = 'fas fa-paper-plane mr-2';
             btn.disabled = false;
