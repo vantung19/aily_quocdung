@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quốc Dũng & Ái Ly - Wedding Invitation</title>
+    <title>Ái Ly & Quốc Dũng - Wedding Invitation</title>
+
+    <!-- Thẻ tạo Thumbnail khi chia sẻ link lên Zalo, Facebook (Open Graph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vantung19.github.io/aily_quocdung/">
+    <meta property="og:title" content="Ái Ly & Quốc Dũng - Wedding Invitation">
+    <meta property="og:description" content="Trân trọng kính mời bạn cùng gia đình đến dự lễ cưới của chúng tôi.">
+    <!-- Đường dẫn ảnh thumbnail (đang lấy ảnh bìa) -->
+    <meta property="og:image" content="https://vantung19.github.io/aily_quocdung/images/bg-header.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,7 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
     <style>
-      /* CÀI ĐẶT FONT FZ MANSTEIN CHO TÊN CÔ DÂU CHÚ RỂ */
+      /* CÀI ĐẶT FONT FZ MANSTEIN CHO TÊN CÔ DÂU CHÚ RỂ (Đã đổi sang LuxuriousScript theo file của bạn) */
       @font-face {
         font-family: 'FzManstein';
         src: url('LuxuriousScript-Regular.ttf') format('truetype');
@@ -101,8 +111,10 @@
         to { transform: rotate(360deg); }
       }
       .animate-spin-slow { animation: slow-spin 15s linear infinite; }
+
+      /* Thêm hiệu ứng xoay cho nút nhạc */
+      .spin-music { animation: slow-spin 3s linear infinite; }
       
-      /* FIX LỖI HỘP QUÀ TẠI ĐÂY */
       .vs-qr-content { display: none; }
       .vs-qr-content.show { display: flex; animation: fadeInUp 0.5s; }
     </style>
@@ -110,6 +122,15 @@
 <body class="antialiased">
 
 <div id="wrapper" class="min-h-screen w-full max-w-[1200px] mx-auto bg-white shadow-2xl relative overflow-hidden pb-10 flex flex-col items-center">
+
+<!-- NÚT PHÁT NHẠC NỔI -->
+<div id="music-container" class="fixed bottom-6 right-4 md:right-8 md:bottom-8 z-50 cursor-pointer w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(183,0,0,0.3)] border-2 border-wedding-red hover:scale-110 transition-transform">
+    <i id="music-icon" class="fas fa-volume-mute text-wedding-red text-xl md:text-2xl"></i>
+    <!-- Thêm autoplay và preload -->
+    <audio id="bg-music" loop autoplay preload="auto">
+        <source src="images/music.mp3" type="audio/mpeg">
+    </audio>
+</div>
     
 <!-- PHẦN HEADER -->
 <header class="relative overflow-hidden min-h-screen w-full flex flex-col justify-between items-center py-12">
@@ -128,11 +149,9 @@
     <div class="z-20 flex flex-col items-center text-center mt-auto mb-auto w-full px-4"> 
         <h2 class="font-amira text-white leading-[0.8] whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] animate__animated animate__zoomIn flex flex-col items-start"
             style="font-size: clamp(4.5rem, 18vw, 11rem); transform: rotate(-3deg);">
-            <span>W2e got2</span>
-            <!-- ml-[1.6em] giúp đẩy chữ Married lùi vào đúng ngay cuối chữ got -->
-            <span class="ml-[1.6em]">M2arried</span>
+            <span>We got</span>
+            <span class="ml-[1.6em]">Married</span>
         </h2>
-        
         
         <p class="font-title text-black font-bold tracking-[0.1em] mt-2 whitespace-nowrap animate__animated animate__fadeInUp animate__delay-1s"
            style="font-size: clamp(1.2rem, 5vw, 2.2rem); text-shadow: 0 1px 3px rgba(255,255,255,0.9);">
@@ -147,7 +166,7 @@
             Trân Trọng Kính Mời
         </h3>
         <div id="guest-box" class="w-full hidden mt-2 flex justify-center">
-            <h3 id="guest-name" class="font-title text-wedding-black tracking-wide capitalize font-bold whitespace-nowrap" 
+            <h3 id="guest-name" class="font-title text-black tracking-wide capitalize font-bold whitespace-nowrap" 
                 style="font-size: clamp(1.5rem, 6vw, 2.8rem); text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
             </h3>
         </div>
@@ -176,14 +195,13 @@
     </section>
 
     <!-- FAMILIES SECTION -->
-    <section class="py-8 px-8 bg-white text-center">
+    <section class="py-8 px-4 w-full bg-white text-center flex flex-col items-center">
         <div class="flex items-center justify-center gap-6 mb-12 wow animate__animated animate__fadeIn">
-            <div class="h-[1px] w-20 bg-wedding-red opacity-30"></div>
-            <i class="fas fa-heart text-wedding-red text-sm"></i>
-            <div class="h-[1px] w-20 bg-wedding-red opacity-30"></div>
+            <div class="h-[1px] w-20 md:w-32 bg-wedding-red opacity-30"></div>
+            <i class="fas fa-heart text-wedding-red text-sm md:text-lg"></i>
+            <div class="h-[1px] w-20 md:w-32 bg-wedding-red opacity-30"></div>
         </div>
 
-        <!-- ĐÃ FIX: Giảm khoảng cách mb-16 xuống mb-6 để thu hẹp khoảng trống phía dưới -->
         <div class="w-full flex justify-center gap-8 md:gap-24 max-w-4xl mx-auto mb-6 px-2">
             <!-- Nhà Gái -->
             <div class="wow animate__animated animate__fadeInLeft flex flex-col items-center">
@@ -205,17 +223,15 @@
             </div>
         </div>
 
-        <!-- ĐÃ FIX: Giảm khoảng cách mb-10 xuống mb-4 -->
         <div class="flex items-center justify-center gap-6 mb-4 wow animate__animated animate__zoomIn">
-            <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#b70000] opacity-40"></div>
-            <i class="fas fa-heart text-wedding-red text-[10px]"></i>
-            <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#b70000] opacity-40"></div>
+            <div class="h-[1px] w-16 md:w-24 bg-gradient-to-r from-transparent to-[#b70000] opacity-40"></div>
+            <i class="fas fa-heart text-wedding-red text-[10px] md:text-sm"></i>
+            <div class="h-[1px] w-16 md:w-24 bg-gradient-to-l from-transparent to-[#b70000] opacity-40"></div>
         </div>
 
         <div class="wow animate__animated animate__fadeInUp flex flex-col items-center w-full">
-            <h2 class="font-bride-groom text-wedding-red mb-4 capitalize whitespace-nowrap" style="font-size: clamp(1.8rem, 10vw, 3.75rem);">Trân trọng kính mời</h2>
-            <p class="font-title mb-1 text-gray-900 font-bold whitespace-nowrap" style="font-size: clamp(1rem, 3.5vw, 1.5rem);">Bạn cùng gia đình</p>
-            <p class="font-body italic text-gray-500 mb-10 whitespace-nowrap" style="font-size: clamp(0.65rem, 2.5vw, 1rem);">(Tới dự Lễ Vu Quy của hai con chúng tôi)</p>
+            <h2 class="font-bride-groom text-wedding-red mb-4 capitalize whitespace-nowrap" style="font-size: clamp(1.8rem, 10vw, 3.75rem);">Trân trọng báo tin</h2>
+            <p class="font-title text-xl mb-1 text-gray-900 font-bold whitespace-nowrap" style="font-size: clamp(1rem, 3.5vw, 1.5rem);">Lễ Vu Quy của hai con chúng tôi</p>
         </div>
 
         <div class="flex items-center justify-center gap-2 sm:gap-6 mb-12 flex-nowrap whitespace-nowrap px-2 w-full wow animate__animated animate__fadeInUp">
@@ -224,10 +240,10 @@
             <p class="font-bride-groom text-wedding-red leading-none pt-2 whitespace-nowrap" style="font-size: clamp(2rem, 8vw, 3.75rem);">Quốc Dũng</p>
         </div>
 
-               <!-- Chi Tiết Sự Kiện -->
+        <!-- Chi Tiết Sự Kiện -->
         <div class="space-y-4 bg-gray-50 p-6 md:p-12 w-[95%] md:max-w-3xl mx-auto rounded-2xl border border-dashed border-wedding-red/20 flex flex-col items-center wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
             <p class="font-title text-lg text-wedding-red font-bold">Tổ chức vào lúc 11 giờ 00</p>
-            <p class="font-title text-xl text-gray-800 font-bold">Thứ Bảy, ngày 03 tháng 05 năm 2026</p>
+            <p class="font-title text-xl text-gray-800 font-bold">Thứ Bảy, ngày 02 tháng 05 năm 2026</p>
             <p class="font-body italic text-gray-500 text-base">(Tức ngày 16 tháng 03 năm Bính Ngọ)</p>
             
             <div class="py-4">
@@ -240,7 +256,7 @@
     </section>
 
     <!-- QUOTE & PHOTOS -->
-        <section class="w-full px-4 md:max-w-4xl mx-auto pt-0 pb-10 flex flex-col items-center text-center">
+    <section class="w-full px-4 md:max-w-4xl mx-auto pt-0 pb-10 flex flex-col items-center text-center">
         <h1 class="font-harukaze flex items-center justify-center gap-3 wow animate__animated animate__fadeInDown text-wedding-red mb-6 whitespace-nowrap" style="font-size: clamp(1.5rem, 8vw, 3rem);">
             <span>❤️</span> My Lover <span>❤️</span>
         </h1>
@@ -289,12 +305,10 @@
                     
                     <div></div><div></div><div></div><div></div><div></div>
                     <div class="flex justify-center items-center">1</div>
-                    
                     <div class="relative flex justify-center items-center">
                         <span class="relative z-10 text-white font-bold text-2xl md:text-4xl drop-shadow-md">2</span>
                         <i class="fas fa-heart absolute text-[#b70000] text-4xl md:text-[3.5rem] animate__animated animate__pulse animate__infinite opacity-95 drop-shadow-[0_0_10px_rgba(183,0,0,0.8)]" style="z-index: -1;"></i>
                     </div>
-                    
                     <div class="flex justify-center items-center">3</div>
                     <div class="flex justify-center items-center">4</div>
                     <div class="flex justify-center items-center">5</div>
@@ -333,8 +347,8 @@
             </div>
 
             <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-12 pb-4 md:pb-6 text-center text-white flex flex-col items-center">
-                <p class="font-title tracking-[0.2em] mb-1 font-bold uppercase drop-shadow-md whitespace-nowrap" style="font-size: clamp(0.7rem, 3vw, 1.25rem);">Thứ Bảy, 02/05/2026</p>
-                <p class="font-body opacity-90 tracking-wide drop-shadow-md whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Âm lịch 16/03 Bính Ngọ | 11:00 AM</p>
+                <p class="font-title tracking-[0.2em] mb-1 font-bold uppercase drop-shadow-md whitespace-nowrap" style="font-size: clamp(0.7rem, 3vw, 1.25rem);">Chủ Nhật, 03/05/2026</p>
+                <p class="font-body opacity-90 tracking-wide drop-shadow-md whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 1rem);">Âm lịch 17/03 Bính Ngọ | 11:00 AM</p>
             </div>
         </div>
 
@@ -372,7 +386,7 @@
             <p class="whitespace-nowrap" style="font-size: clamp(1rem, 4vw, 1.875rem);">Day</p>
         </div>
         
-        <div class="relative overflow-hidden mb-8 wow animate__animated animate__zoomIn w-[95%] md:w-2/3 max-w-2xl flex justify-center gap-3 md:gap-8 mx-auto">
+        <div class="relative overflow-hidden mb-8 wow animate__animated animate__zoomIn w-[95%] md:w-2/3 max-w-2xl flex justify-center gap-2 md:gap-4 mx-auto">
             <img src="images/8.svg" class="w-1/2 rounded-xl shadow-md object-cover aspect-[740/991]" alt="Photo 1">
             <img src="images/10.svg" class="w-1/2 rounded-xl shadow-md object-cover aspect-[740/991]" alt="Photo 2">
         </div>
@@ -471,7 +485,6 @@
             <p class="mt-4 md:mt-6 font-accent tracking-[0.2em] text-gray-400 whitespace-nowrap" style="font-size: clamp(0.6rem, 2.5vw, 0.875rem);">NHẤN ĐỂ MỞ</p>
         </div>
 
-        <!-- FIX: Đã xóa class flex ở div này để ẩn hoàn toàn lúc chưa nhấn -->
         <div id="qrContent" class="vs-qr-content mt-10 md:mt-12 p-6 md:p-10 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 w-[95%] md:max-w-2xl flex-col items-center">
             <h3 class="font-harukaze text-[#f1c40f] mb-6 whitespace-nowrap" style="font-size: clamp(1.8rem, 7vw, 3.75rem);">Mừng cưới sớm</h3>
             <p class="font-body text-white mb-6 whitespace-nowrap" style="font-size: clamp(0.75rem, 3.5vw, 1.5rem);">Huynh Le Ai Ly - ACB - 25665987</p>
@@ -582,6 +595,49 @@
             btn.classList.remove('opacity-70', 'cursor-not-allowed');
         });
     });
+
+    // 5. LOGIC PHÁT NHẠC
+    const musicContainer = document.getElementById('music-container');
+    const bgMusic = document.getElementById('bg-music');
+    const musicIcon = document.getElementById('music-icon');
+    let isMusicPlaying = false;
+
+    function toggleMusic() {
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            musicIcon.classList.remove('fa-music', 'spin-music');
+            musicIcon.classList.add('fa-volume-mute');
+        } else {
+            bgMusic.play();
+            musicIcon.classList.remove('fa-volume-mute');
+            musicIcon.classList.add('fa-music', 'spin-music');
+        }
+        isMusicPlaying = !isMusicPlaying;
+    }
+
+    musicContainer.addEventListener('click', toggleMusic);
+
+    // Tự động phát nhạc khi người dùng tương tác lần đầu (Click, chạm, cuộn)
+    const startMusic = () => {
+        if (!isMusicPlaying) {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                musicIcon.classList.remove('fa-volume-mute');
+                musicIcon.classList.add('fa-music', 'spin-music');
+            }).catch((e) => {
+                console.log("Autoplay bị chặn:", e);
+            });
+        }
+        // Gỡ bỏ sự kiện sau khi đã kích hoạt
+        document.removeEventListener('click', startMusic);
+        document.removeEventListener('touchstart', startMusic);
+        document.removeEventListener('scroll', startMusic);
+    };
+
+    // Bắt các sự kiện tương tác của người dùng
+    document.addEventListener('click', startMusic, { once: true });
+    document.addEventListener('touchstart', startMusic, { once: true });
+    document.addEventListener('scroll', startMusic, { once: true });
 </script>
 
 </body>
