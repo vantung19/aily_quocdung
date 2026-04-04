@@ -546,13 +546,19 @@
 
     // Hàm lấy tham số URL nhưng giữ nguyên dấu +
     function getCustomParam(name) {
-        const search = window.location.search.substring(1);
+        let search = window.location.search.substring(1);
+        
+        // Khắc phục lỗi Zalo tự chuyển "<3" thành mã HTML "&lt;3" làm đứt link (vì chứa dấu &)
+        search = search.replace(/&lt;/g, '<');
+
         const params = search.split('&');
         for (let i = 0; i < params.length; i++) {
             const pair = params[i].split('=');
             if (pair[0] === name) {
+                // Lấy toàn bộ phần sau dấu = đầu tiên (phòng hờ tên khách có dấu =)
+                let val = params[i].substring(name.length + 1);
                 // decodeURIComponent sẽ giữ nguyên dấu +, không bị đổi thành khoảng trắng
-                return decodeURIComponent(pair[1] || '');
+                return decodeURIComponent(val || '');
             }
         }
         return null;
@@ -586,7 +592,6 @@
             }
         }
     });
-
     // 2. LOGIC ĐẾM NGƯỢC (02/05/2026)
     const targetDate = new Date("May 2, 2026 11:00:00").getTime();
     function updateCountdown() {
