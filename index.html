@@ -544,7 +544,7 @@
 <script>
     new WOW().init();
 
-    // 1. LOGIC LẤY TÊN KHÁCH MỜI (PHIÊN BẢN CHỐNG ZALO PC & BẢO VỆ 2 LỚP MÃ HÓA)
+    // 1. LOGIC LẤY TÊN KHÁCH MỜI (KỸ THUẬT TÀNG HÌNH CHỐNG ZALO PC 100%)
     document.addEventListener("DOMContentLoaded", function() {
         function getGuestName() {
             let href = window.location.href;
@@ -564,14 +564,20 @@
             // Xử lý Zalo bóp méo dấu < thành &lt;
             nameRaw = nameRaw.replace(/&lt;/gi, '%3C'); 
             
+            // KỸ THUẬT TÀNG HÌNH: Đổi dấu gạch dưới '_' ngược lại thành '%'
+            // Do trong Excel ta đã giấu Zalo bằng cách biến % thành _
+            if (nameRaw.includes('_')) {
+                nameRaw = nameRaw.replace(/_/g, '%');
+            }
+
             let decoded = nameRaw;
             
-            // GIẢI MÃ NHIỀU LỚP: Lột từng lớp mã hóa (đề phòng Zalo PC lột 1 lớp, Zalo Mobile không lột)
+            // GIẢI MÃ: Lột từng lớp mã hóa
             try {
                 let limit = 3;
                 while (decoded.includes('%') && limit > 0) {
                     let temp = decodeURIComponent(decoded);
-                    if (temp === decoded) break; // Nếu lột rồi mà không đổi -> đã lột xong
+                    if (temp === decoded) break;
                     decoded = temp;
                     limit--;
                 }
