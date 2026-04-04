@@ -544,44 +544,45 @@
 <script>
     new WOW().init();
 
-    // Hàm lấy tham số URL nhưng giữ nguyên dấu +
-    function getCustomParam(name) {
-        let search = window.location.search.substring(1);
-        
-        // Khắc phục lỗi Zalo tự chuyển "<3" thành mã HTML "&lt;3" làm đứt link (vì chứa dấu &)
-        search = search.replace(/&lt;/g, '<');
-
-        const params = search.split('&');
-        for (let i = 0; i < params.length; i++) {
-            const pair = params[i].split('=');
-            if (pair[0] === name) {
-                // Lấy toàn bộ phần sau dấu = đầu tiên (phòng hờ tên khách có dấu =)
-                let val = params[i].substring(name.length + 1);
-                // decodeURIComponent sẽ giữ nguyên dấu +, không bị đổi thành khoảng trắng
-                return decodeURIComponent(val || '');
-            }
-        }
-        return null;
-    }
-
     // 1. LOGIC LẤY TÊN KHÁCH MỜI
     document.addEventListener("DOMContentLoaded", function() {
-        // Sử dụng hàm tự viết thay vì URLSearchParams
-        let guestName = getCustomParam('to') || getCustomParam('name') || getCustomParam('guest');
+        function getGuestName() {
+            let url = window.location.href;
+            
+            // Tiền xử lý các dạng mã hóa của trái tim để không bị đứt link
+            url = url.replace(/%3C3/gi, '❤️').replace(/&lt;3/gi, '❤️').replace(/<3/g, '❤️');
 
+            // Lấy từ tham số ?to=, ?name=, ?guest= (Quét thông minh bỏ qua sự can thiệp của Messenger)
+            let match = url.match(/[?&](to|name|guest)=([^&]*)/i);
+            if (match && match[2]) {
+                try { return decodeURIComponent(match[2]); } catch(e) { return unescape(match[2]); }
+            }
+
+            // Lấy từ dấu # (nếu dùng link có #)
+            let hash = window.location.hash.substring(1);
+            if (hash) {
+                try { return decodeURIComponent(hash); } catch(e) { return unescape(hash); }
+            }
+            return null;
+        }
+
+        let guestName = getGuestName();
+
+        // Fallback lấy từ tên file/đường dẫn cuối (NẾU KHÔNG CÓ THAM SỐ)
         if (!guestName) {
             const pathParts = window.location.pathname.split('/').filter(Boolean);
             if (pathParts.length > 0) {
                 const lastPart = pathParts[pathParts.length - 1];
-                if (lastPart !== 'index.html' && !lastPart.includes('.')) {
-                    guestName = decodeURIComponent(lastPart);
+                // CHẶN TUYỆT ĐỐI HIỂN THỊ TÊN THƯ MỤC GỐC "aily_quocdung"
+                if (lastPart !== 'index.html' && !lastPart.includes('.') && lastPart.toLowerCase() !== 'aily_quocdung') {
+                    try { guestName = decodeURIComponent(lastPart); } catch(e) { guestName = unescape(lastPart); }
                 }
             }
         }
 
         if (guestName) {
-            // Tự động chuyển đổi chuỗi "<3" thành biểu tượng trái tim ❤️
-            guestName = guestName.replace(/<3/g, '❤️');
+            // Ép kiểu icon trái tim lần cuối
+            guestName = guestName.replace(/%3C3/gi, '❤️').replace(/<3/g, '❤️').replace(/&lt;3/gi, '❤️');
 
             document.getElementById('guest-name').innerText = guestName;
             document.getElementById('guest-box').classList.remove('hidden');
