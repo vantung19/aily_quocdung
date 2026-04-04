@@ -544,10 +544,24 @@
 <script>
     new WOW().init();
 
+    // Hàm lấy tham số URL nhưng giữ nguyên dấu +
+    function getCustomParam(name) {
+        const search = window.location.search.substring(1);
+        const params = search.split('&');
+        for (let i = 0; i < params.length; i++) {
+            const pair = params[i].split('=');
+            if (pair[0] === name) {
+                // decodeURIComponent sẽ giữ nguyên dấu +, không bị đổi thành khoảng trắng
+                return decodeURIComponent(pair[1] || '');
+            }
+        }
+        return null;
+    }
+
     // 1. LOGIC LẤY TÊN KHÁCH MỜI
     document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        let guestName = urlParams.get('to') || urlParams.get('name') || urlParams.get('guest');
+        // Sử dụng hàm tự viết thay vì URLSearchParams
+        let guestName = getCustomParam('to') || getCustomParam('name') || getCustomParam('guest');
 
         if (!guestName) {
             const pathParts = window.location.pathname.split('/').filter(Boolean);
@@ -560,6 +574,9 @@
         }
 
         if (guestName) {
+            // Tự động chuyển đổi chuỗi "<3" thành biểu tượng trái tim ❤️
+            guestName = guestName.replace(/<3/g, '❤️');
+
             document.getElementById('guest-name').innerText = guestName;
             document.getElementById('guest-box').classList.remove('hidden');
 
