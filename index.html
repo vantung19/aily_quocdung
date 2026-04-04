@@ -14,8 +14,7 @@
     <meta property="og:image" content="https://vantung19.github.io/aily_quocdung/images/bg-header.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <!-- ƯU TIÊN TẢI ẢNH NỀN NHANH NHẤT -->
-    <link rel="preload" as="image" href="images/bg-header.svg">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -115,7 +114,28 @@
 
       /* Thêm hiệu ứng xoay cho nút nhạc */
       .spin-music { animation: slow-spin 3s linear infinite; }
-      
+      /* GAME STYLES */
+      @keyframes fall {
+          0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+      }
+      @keyframes pop {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.5); opacity: 1; }
+          100% { transform: scale(2); opacity: 0; }
+      }
+      .heart-fall {
+          position: absolute;
+          color: #ff4d4d;
+          cursor: pointer;
+          user-select: none;
+          animation: fall linear forwards;
+          filter: drop-shadow(0 0 5px rgba(255,0,0,0.5));
+      }
+      .heart-pop {
+          animation: pop 0.3s ease-out forwards !important;
+          color: #ffeb3b !important; /* Đổi màu vàng chanh khi chạm trúng */
+      }
       .vs-qr-content { display: none; }
       .vs-qr-content.show { display: flex; animation: fadeInUp 0.5s; }
     </style>
@@ -124,18 +144,40 @@
 
 <div id="wrapper" class="min-h-screen w-full max-w-[1200px] mx-auto bg-white shadow-2xl relative overflow-hidden pb-10 flex flex-col items-center">
 
+<!-- NÚT GAME NỔI -->
+<div id="start-game-btn" class="fixed bottom-[5.5rem] md:bottom-[6.5rem] right-4 md:right-8 z-50 cursor-pointer w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(183,0,0,0.3)] border-2 border-wedding-red hover:scale-110 transition-transform">
+    <i class="fas fa-gamepad text-wedding-red text-xl md:text-2xl animate-pulse"></i>
+</div>
+
 <!-- NÚT PHÁT NHẠC NỔI -->
 <div id="music-container" class="fixed bottom-6 right-4 md:right-8 md:bottom-8 z-50 cursor-pointer w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(183,0,0,0.3)] border-2 border-wedding-red hover:scale-110 transition-transform">
     <i id="music-icon" class="fas fa-volume-mute text-wedding-red text-xl md:text-2xl"></i>
-    <!-- Thêm autoplay và preload -->
     <audio id="bg-music" loop autoplay preload="auto">
         <source src="images/music.mp3" type="audio/mpeg">
     </audio>
 </div>
+
+<!-- OVERLAY GAME MINI -->
+<div id="game-overlay" class="fixed inset-0 bg-black/80 z-[100] hidden flex-col items-center justify-center overflow-hidden">
+    <div class="absolute top-8 left-8 text-white font-title text-2xl font-bold drop-shadow-md">Điểm: <span id="game-score" class="text-wedding-red text-4xl">0</span></div>
+    <div class="absolute top-8 right-8 text-white font-title text-2xl font-bold drop-shadow-md">Giây: <span id="game-timer">15</span>s</div>
     
+    <!-- Nơi chứa trái tim rơi -->
+    <div id="game-container" class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- Hộp thoại thông báo Game -->
+    <div id="game-modal" class="bg-white p-8 rounded-2xl text-center max-w-sm w-[90%] z-20 shadow-2xl">
+        <h2 id="game-modal-title" class="font-bride-groom text-5xl text-wedding-red mb-4 mt-2">Hứng Tim</h2>
+        <p id="game-modal-desc" class="font-body text-gray-700 mb-8 text-lg">Chạm vào những trái tim đang rơi xuống để gửi lời chúc phúc đến chúng mình nhé! Bạn có <b class="text-wedding-red">15 giây</b>.</p>
+        <div class="flex flex-col gap-3">
+            <button id="game-start-btn" class="bg-wedding-red text-white py-3 px-8 rounded-full font-title text-lg font-bold uppercase hover:bg-red-800 transition-colors shadow-lg">Bắt đầu chơi</button>
+            <button id="game-close-btn" class="text-gray-500 underline text-sm hover:text-gray-800 mt-2">Đóng game</button>
+        </div>
+    </div>
+</div>
 <!-- PHẦN HEADER -->
 <header class="relative overflow-hidden min-h-screen w-full flex flex-col justify-between items-center py-12">
-   <img src="images/bg-header.webp" fetchpriority="high" decoding="sync" class="absolute inset-0 w-full h-full object-cover object-top md:object-[50%_25%] animate__animated animate__fadeIn z-0" alt="Wedding Photo">
+    <img src="images/bg-header.svg" class="absolute inset-0 w-full h-full object-cover object-top md:object-[50%_25%] animate__animated animate__fadeIn z-0" alt="Wedding Photo">
     <div class="absolute inset-0 bg-white/10 pointer-events-none z-0"></div>
 
     <!-- KHỐI TRÊN CÙNG: Tên CDCR -->
@@ -208,8 +250,8 @@
             <div class="wow animate__animated animate__fadeInLeft flex flex-col items-center">
                 <h3 class="font-title text-gray-800 mb-2 whitespace-nowrap" style="font-size: clamp(0.9rem, 3.5vw, 1.5rem);">Nhà Gái</h3>
                 <div class="font-title text-gray-800 leading-relaxed flex flex-col items-center">
-                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Ông: Huỳnh Tấn Lực</p>
-                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Bà: Lê Thị Thu Hồng</p>
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Ông Huỳnh Tấn Lực</p>
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Bà Lê Thị Thu Hồng</p>
                     <p class="text-gray-600 mt-1 whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.15rem);">Xã Phù Cát, Gia Lai</p>
                 </div>
             </div>
@@ -217,8 +259,8 @@
             <div class="wow animate__animated animate__fadeInRight flex flex-col items-center">
                 <h3 class="font-title text-gray-800 mb-2 whitespace-nowrap" style="font-size: clamp(0.9rem, 3.5vw, 1.5rem);">Nhà Trai</h3>
                 <div class="font-title text-gray-800 leading-relaxed flex flex-col items-center">
-                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Ông: Trần Văn Sơn</p>
-                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Bà: Ngô Thị Sáng</p>
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Ông Trần Văn Sơn</p>
+                    <p class="font-bold uppercase whitespace-nowrap" style="font-size: clamp(0.8rem, 3.5vw, 1.35rem);">Bà Ngô Thị Sáng</p>
                     <p class="text-gray-600 mt-1 whitespace-nowrap" style="font-size: clamp(0.7rem, 2.8vw, 1.15rem);">Phường Sông Cầu, Đắk Lắk</p>
                 </div>
             </div>
@@ -639,6 +681,139 @@
     document.addEventListener('click', startMusic, { once: true });
     document.addEventListener('touchstart', startMusic, { once: true });
     document.addEventListener('scroll', startMusic, { once: true });
+// 6. LOGIC GAME HỨNG TIM
+    const gameOverlay = document.getElementById('game-overlay');
+    const openGameBtn = document.getElementById('start-game-btn');
+    const closeGameBtn = document.getElementById('game-close-btn');
+    const startGameBtn = document.getElementById('game-start-btn');
+    const gameModal = document.getElementById('game-modal');
+    const gameContainer = document.getElementById('game-container');
+    const scoreEl = document.getElementById('game-score');
+    const timerEl = document.getElementById('game-timer');
+    const modalTitle = document.getElementById('game-modal-title');
+    const modalDesc = document.getElementById('game-modal-desc');
+
+    let gameScore = 0;
+    let gameTimeLeft = 15;
+    let gameInterval;
+    let heartInterval;
+    let isGamePlaying = false;
+
+    // Mở Game
+    openGameBtn.addEventListener('click', () => {
+        gameOverlay.classList.remove('hidden');
+        gameOverlay.classList.add('flex');
+        resetGameUI();
+    });
+
+    // Đóng Game
+    closeGameBtn.addEventListener('click', () => {
+        gameOverlay.classList.add('hidden');
+        gameOverlay.classList.remove('flex');
+        endGame(false);
+    });
+
+    // Nút Bắt đầu chơi
+    startGameBtn.addEventListener('click', () => {
+        startGame();
+    });
+
+    function resetGameUI() {
+        gameScore = 0;
+        gameTimeLeft = 15;
+        scoreEl.innerText = gameScore;
+        timerEl.innerText = gameTimeLeft;
+        gameModal.style.display = 'block';
+        startGameBtn.innerText = 'Bắt đầu chơi';
+        modalTitle.innerText = 'Hứng Tim';
+        modalDesc.innerHTML = 'Chạm vào những trái tim đang rơi xuống để gửi lời chúc phúc đến chúng mình nhé! Bạn có <b class="text-wedding-red">15 giây</b>.';
+        gameContainer.innerHTML = '';
+    }
+
+    function startGame() {
+        isGamePlaying = true;
+        gameModal.style.display = 'none';
+        gameScore = 0;
+        gameTimeLeft = 15;
+        scoreEl.innerText = gameScore;
+        timerEl.innerText = gameTimeLeft;
+        gameContainer.innerHTML = '';
+
+        // Đếm ngược thời gian
+        gameInterval = setInterval(() => {
+            gameTimeLeft--;
+            timerEl.innerText = gameTimeLeft;
+            if(gameTimeLeft <= 0) endGame(true);
+        }, 1000);
+
+        // Tạo trái tim rơi liên tục (mỗi 400ms tạo 1 trái)
+        heartInterval = setInterval(createHeart, 400);
+    }
+
+    function createHeart() {
+        if(!isGamePlaying) return;
+        const heart = document.createElement('i');
+        heart.classList.add('fas', 'fa-heart', 'heart-fall', 'pointer-events-auto');
+        
+        // Vị trí rơi ngẫu nhiên
+        heart.style.left = Math.random() * 90 + 'vw';
+        
+        // Kích thước ngẫu nhiên (từ 20px đến 45px)
+        const size = Math.random() * 25 + 20;
+        heart.style.fontSize = size + 'px';
+        
+        // Tốc độ rơi ngẫu nhiên (từ 2s đến 4s)
+        const duration = Math.random() * 2 + 2;
+        heart.style.animationDuration = duration + 's';
+        
+        // Bắt sự kiện khi click hoặc chạm vào tim
+        heart.addEventListener('touchstart', popHeart);
+        heart.addEventListener('mousedown', popHeart);
+        
+        gameContainer.appendChild(heart);
+
+        // Tự động xóa tim khi rơi khỏi màn hình
+        setTimeout(() => {
+            if (heart.parentNode === gameContainer) {
+                heart.remove();
+            }
+        }, duration * 1000);
+    }
+
+    function popHeart(e) {
+        e.preventDefault(); 
+        if(!isGamePlaying) return;
+        if(this.classList.contains('heart-pop')) return;
+        
+        // Cộng điểm
+        gameScore++;
+        scoreEl.innerText = gameScore;
+        
+        // Hiệu ứng nổ tim
+        this.classList.add('heart-pop');
+        
+        // Rung nhẹ điện thoại (nếu thiết bị hỗ trợ)
+        if (navigator.vibrate) navigator.vibrate(50);
+
+        // Xóa tim sau khi nổ xong
+        setTimeout(() => {
+            if (this.parentNode === gameContainer) this.remove();
+        }, 300);
+    }
+
+    function endGame(showResult = false) {
+        isGamePlaying = false;
+        clearInterval(gameInterval);
+        clearInterval(heartInterval);
+        gameContainer.innerHTML = '';
+        
+        if(showResult) {
+            gameModal.style.display = 'block';
+            modalTitle.innerText = 'Hết Giờ!';
+            modalDesc.innerHTML = `Tuyệt vời! Bạn đã hứng được <b>${gameScore}</b> trái tim chúc phúc gửi tới Ái Ly và Quốc Dũng. Cảm ơn bạn rất nhiều! ❤️`;
+            startGameBtn.innerText = 'Chơi lại';
+        }
+    }
 </script>
 
 </body>
