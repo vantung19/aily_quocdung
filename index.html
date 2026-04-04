@@ -544,19 +544,20 @@
 <script>
     new WOW().init();
 
-    // 1. LOGIC LẤY TÊN KHÁCH MỜI (KỸ THUẬT TÀNG HÌNH CHỐNG ZALO PC 100%)
+    // 1. LOGIC LẤY TÊN KHÁCH MỜI (KỸ THUẬT TÀNG HÌNH CHỐNG ZALO PC & FB MESSENGER 100%)
     document.addEventListener("DOMContentLoaded", function() {
         function getGuestName() {
             let href = window.location.href;
             let nameRaw = "";
             
-            // Lấy chuỗi từ ?to= (Ưu tiên 1)
-            if (href.includes('?to=')) {
-                nameRaw = href.split('?to=')[1].split('&')[0];
+            // Ưu tiên 1: Lấy từ ?to= (Facebook Messenger rất thích định dạng này và sẽ không bị cắt)
+            let match = href.match(/[?&](to|name|guest)=([^&#]*)/i);
+            if (match && match[2]) {
+                nameRaw = match[2];
             } 
-            // Hoặc lấy từ dấu # (Ưu tiên 2 - Khuyên dùng)
+            // Ưu tiên 2: Fallback lấy từ dấu # nếu không dùng dấu ?
             else if (href.includes('#')) {
-                nameRaw = href.split('#')[1];
+                nameRaw = href.split('#')[1].split('?')[0]; // Bỏ qua nếu có query phụ phía sau
             }
             
             if (!nameRaw) return null;
