@@ -544,46 +544,55 @@
 <script>
     new WOW().init();
 
-    // 1. LOGIC LẤY TÊN KHÁCH MỜI
+    // 1. LOGIC LẤY TÊN KHÁCH MỜI (PHIÊN BẢN CHỐNG ZALO PC & BẢO VỆ 2 LỚP MÃ HÓA)
     document.addEventListener("DOMContentLoaded", function() {
         function getGuestName() {
-            let url = window.location.href;
+            let href = window.location.href;
+            let nameRaw = "";
             
-            // Tiền xử lý các dạng mã hóa của trái tim để không bị đứt link
-            url = url.replace(/%3C3/gi, '❤️').replace(/&lt;3/gi, '❤️').replace(/<3/g, '❤️');
+            // Lấy chuỗi từ ?to= (Ưu tiên 1)
+            if (href.includes('?to=')) {
+                nameRaw = href.split('?to=')[1].split('&')[0];
+            } 
+            // Hoặc lấy từ dấu # (Ưu tiên 2 - Khuyên dùng)
+            else if (href.includes('#')) {
+                nameRaw = href.split('#')[1];
+            }
+            
+            if (!nameRaw) return null;
 
-            // Lấy từ tham số ?to=, ?name=, ?guest= (Quét thông minh bỏ qua sự can thiệp của Messenger)
-            let match = url.match(/[?&](to|name|guest)=([^&]*)/i);
-            if (match && match[2]) {
-                try { return decodeURIComponent(match[2]); } catch(e) { return unescape(match[2]); }
+            // Xử lý Zalo bóp méo dấu < thành &lt;
+            nameRaw = nameRaw.replace(/&lt;/gi, '%3C'); 
+            
+            let decoded = nameRaw;
+            
+            // GIẢI MÃ NHIỀU LỚP: Lột từng lớp mã hóa (đề phòng Zalo PC lột 1 lớp, Zalo Mobile không lột)
+            try {
+                let limit = 3;
+                while (decoded.includes('%') && limit > 0) {
+                    let temp = decodeURIComponent(decoded);
+                    if (temp === decoded) break; // Nếu lột rồi mà không đổi -> đã lột xong
+                    decoded = temp;
+                    limit--;
+                }
+            } catch(e) {
+                try { decoded = unescape(nameRaw); } catch(ex) {}
             }
 
-            // Lấy từ dấu # (nếu dùng link có #)
-            let hash = window.location.hash.substring(1);
-            if (hash) {
-                try { return decodeURIComponent(hash); } catch(e) { return unescape(hash); }
-            }
-            return null;
+            return decoded;
         }
 
         let guestName = getGuestName();
 
-        // Fallback lấy từ tên file/đường dẫn cuối (NẾU KHÔNG CÓ THAM SỐ)
-        if (!guestName) {
-            const pathParts = window.location.pathname.split('/').filter(Boolean);
-            if (pathParts.length > 0) {
-                const lastPart = pathParts[pathParts.length - 1];
-                // CHẶN TUYỆT ĐỐI HIỂN THỊ TÊN THƯ MỤC GỐC "aily_quocdung"
-                if (lastPart !== 'index.html' && !lastPart.includes('.') && lastPart.toLowerCase() !== 'aily_quocdung') {
-                    try { guestName = decodeURIComponent(lastPart); } catch(e) { guestName = unescape(lastPart); }
-                }
-            }
+        // NẾU TÊN BỊ LỖI LÀ Aily_quocdung (DO FACEBOOK/MESSENGER), TỰ ĐỘNG XÓA ĐỂ TRÁNH QUÊ
+        if (guestName && guestName.toLowerCase() === 'aily_quocdung') {
+            guestName = null;
         }
 
         if (guestName) {
             // Ép kiểu icon trái tim lần cuối
-            guestName = guestName.replace(/%3C3/gi, '❤️').replace(/<3/g, '❤️').replace(/&lt;3/gi, '❤️');
-
+            guestName = guestName.replace(/%3C3/gi, '❤️').replace(/<3/g, '❤️');
+            
             document.getElementById('guest-name').innerText = guestName;
             document.getElementById('guest-box').classList.remove('hidden');
 
